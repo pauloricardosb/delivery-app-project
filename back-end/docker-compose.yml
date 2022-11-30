@@ -12,7 +12,7 @@ services:
       - ./:/app
   db:
     container_name: app_delivery_db
-    image: mysql:8.0.21
+    image: mysql:5.7
     restart: always
     ports:
       - 3306:3306
