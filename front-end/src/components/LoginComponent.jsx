@@ -25,6 +25,10 @@ function LoginComponent() {
         >
           Ainda não tenho conta.
         </button>
+
+        <p data-testid="common_login__element-invalid-email">
+          Elemento Oculto(Mensagens de erro)
+        </p>
       </div>
     </div>
   );
