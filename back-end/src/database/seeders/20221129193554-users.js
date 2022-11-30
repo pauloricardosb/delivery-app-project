@@ -1,23 +1,28 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('users', [{
-      name: 'Zé Birita',
-      email: 'ze.birita@mail.com',
-      password: 'aca3ec7278a47144c0a863e60c595abe',
-      role: 'customer',
+      id: 1,
+      name: 'Delivery App Admin',
+      email: 'adm@deliveryapp.com',
+      password: 'a4c86edecc5aee06eff8fdeda69e0d04',
+      role: 'administrator',
     },
     {
-      name: 'Fulano Birita',
-      email: 'fulano.birita@mail.com',
-      password: 'aca3ec7278a47144c0a863e60c595abe',
+      id: 2,
+      name: 'Fulana Pereira',
+      email: 'fulana@deliveryapp.com',
+      password: '3c28d2b0881bf46457a853e0b07531c6',
       role: 'seller',
     },
     {
-      name: 'Tereza',
-      email: 'tereza@mail.com',
-      password: 'aca3ec7278a47144c0a863e60c595abe',
-      role: 'admin',
-    }], {});
+      id: 3,
+      name: 'Cliente Zé Birita',
+      email: 'zebirita@email.com',
+      password: '1c37466c159755ce1fa181bd247cb925',
+      role: 'customer',
+    }], {
+      timestamps: false,
+    });
   },
 
   async down (queryInterface, Sequelize) {
