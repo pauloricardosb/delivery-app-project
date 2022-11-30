@@ -1,12 +1,15 @@
-import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import Routers from './router/routers';
+import Login from './pages/Login';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routers />
+      <Routes>
+        <Route path="/login" index element={ <Login /> } />
+        <Route path="/" element={ <Navigate to="/home" replace /> } />
+      </Routes>
     </BrowserRouter>
   );
 }
