@@ -21,7 +21,7 @@ function LoginComponent() {
         </button>
         <button
           type="button"
-          data-data-testid="common_login__button-register"
+          data-testid="common_login__button-register"
         >
           Ainda não tenho conta.
         </button>
