@@ -17,5 +17,17 @@ const getUser = async (email, password ) => {
     return token;
   };
 
-module.exports = { getUser };
+const registerUser = async ({ name, role = 'customer', email, password }) => {
+    const userEmail = await User.findOne({ where: { email } });
+    if (userEmail) throw new Error('Email already registered');
+  
+    const userName = await User.findOne({ where: { name } });
+    if (userName) throw new Error('Name already registered');
+  
+    const newUser = await User
+      .create({ name, role, email, password: md5(password) });
+    return newUser; 
+  };
+
+module.exports = { getUser, registerUser };
 
