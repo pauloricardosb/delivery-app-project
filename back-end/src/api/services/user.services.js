@@ -1,20 +1,26 @@
 const md5 = require('md5');
 const { User } = require('../../database/models');
-const { generateToken } = require('../helpers/generateToken');
+const { generateToken } = require('../helpers/jwt');
 
 const getUser = async (email, password ) => {
-    const user = await User.findOne({
-      where: { email, password: md5(password) },
-      attributes: { exclude: ['password'] },
-    });
+
+  const user = await User.findOne({
+    attributes: ['name', 'role'],
+    where: {
+      email,
+      password: md5(password),
+    },
+  });
 
     if (!user) {
-      throw new Error('Not found');
+      throw new Error('Incorrect email or password');
     }
 
-    const token = generateToken({ email, password });
+    const { name, role } = user.dataValues;
 
-    return token;
+    token = generateToken({ email, role });
+
+    return { name, email, role, token };
   };
 
 const registerUser = async ({ name, role = 'customer', email, password }) => {
@@ -24,9 +30,14 @@ const registerUser = async ({ name, role = 'customer', email, password }) => {
     const userName = await User.findOne({ where: { name } });
     if (userName) throw new Error('Name already registered');
   
-    const newUser = await User
+    const { dataValues: newUser } = await User
       .create({ name, role, email, password: md5(password) });
-    return newUser; 
+    
+    return { 
+      name: newUser.name,
+      email: newUser.email,
+      role: newUser.role
+    };
   };
 
 module.exports = { getUser, registerUser };
