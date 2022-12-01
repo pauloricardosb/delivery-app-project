@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const { User } = require('../../database/models');
-const { generateToken } = require('../helpers/jwt');
+const { generateJWT } = require('../helpers/jwt');
 
 const getUser = async (email, password ) => {
 
@@ -21,7 +21,7 @@ const getUser = async (email, password ) => {
     const { name, role } = user.dataValues; 
 
     // Generates token
-    token = generateToken({ email, role }); 
+    token = generateJWT({ email, role }); 
 
     // API JSON response
     return { name, email, role, token }; 

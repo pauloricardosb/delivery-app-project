@@ -8,7 +8,7 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const generateToken = (values) => {
+const generateJWT = (values) => {
 
   const data = {
     email: values.email,
@@ -27,4 +27,4 @@ const validateToken = (token) => {
   }
 }
 
-module.exports = { generateToken, validateToken };
+module.exports = { generateJWT, validateToken };
