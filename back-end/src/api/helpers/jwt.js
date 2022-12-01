@@ -1,5 +1,5 @@
 require('dotenv').config();
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const secret = process.env.JWT_SECRET || 'secret_key';
 
@@ -9,7 +9,6 @@ const jwtConfig = {
 };
 
 const generateJWT = (values) => {
-
   const data = {
     email: values.email,
     role: values.role,
@@ -25,6 +24,6 @@ const validateToken = (token) => {
   } catch (err) {
     throw new Error('Expired or invalid token');
   }
-}
+};
 
 module.exports = { generateJWT, validateToken };

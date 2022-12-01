@@ -5,18 +5,16 @@ const login = async (req, res) => {
   try {
     const token = await getUser(email, password);
     res.status(200).json({ token });
-  }
-  catch (error) {
+  } catch (error) {
     res.status(404).json({ message: error.message });
   }
-}
+};
 
 const register = async (req, res) => {
   try {
     const newUser = await registerUser(req.body); 
     res.status(201).json(newUser);
-  } 
-  catch (error) {
+  } catch (error) {
     res.status(409).json({ message: error.message });
   }
 };

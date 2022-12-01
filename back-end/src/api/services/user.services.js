@@ -2,8 +2,7 @@ const md5 = require('md5');
 const { User } = require('../../database/models');
 const { generateJWT } = require('../helpers/jwt');
 
-const getUser = async (email, password ) => {
-
+const getUser = async (email, password) => {
   const user = await User.findOne({
     attributes: ['name', 'role'],
     where: {
@@ -21,7 +20,7 @@ const getUser = async (email, password ) => {
     const { name, role } = user.dataValues; 
 
     // Generates token
-    token = generateJWT({ email, role }); 
+    const token = generateJWT({ email, role }); 
 
     // API JSON response
     return { name, email, role, token }; 
@@ -43,9 +42,8 @@ const registerUser = async ({ name, role = 'customer', email, password }) => {
     return { 
       name: newUser.name,
       email: newUser.email,
-      role: newUser.role
+      role: newUser.role,
     };
   };
 
 module.exports = { getUser, registerUser };
-
