@@ -1,18 +1,21 @@
+const md5 = require('md5');
 const { User } = require('../../database/models');
 const { generateToken } = require('../helpers/generateToken');
 
-const getUser = async(email, password) => {
-    await User.findOne({ 
-        where: { email }, 
-        attributes: {
-            exclude: ['password']
-        }
-    })
+const getUser = async (email, password ) => {
+    const user = await User.findOne({
+      where: { email, password: md5(password) },
+      attributes: { exclude: ['password'] },
+    });
 
-    const token = await generateToken({ email, password });
+    if (!user) {
+      throw new Error('Not found');
+    }
+
+    const token = generateToken({ email, password });
 
     return token;
-}
+  };
 
 module.exports = { getUser };
 
