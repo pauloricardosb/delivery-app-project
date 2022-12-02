@@ -29,12 +29,20 @@ const getAllOrders = async () => {
   return sales;
 };
 
-const getOrdersById = async (id) => {
-  const sale = await Sale.findByPk(id);
+const getOrdersById = async (userId) => {
+  const orders = await Sale.findAll({ where: { userId }, raw: true });
 
-  if (!sale) throw new Error('Sale not found');
+  if (!orders) throw new Error('Sale not found');
 
-  return sale;
+  const orderResult = orders.map(({ id, saleDate, totalPrice, status }) => (
+  {
+    id,
+    saleDate: saleDate.toLocaleDateString('pt-BR'),
+    totalPrice,
+    status,
+  }));
+
+  return orderResult;
 };
 
 module.exports = { createOrder, getAllOrders, getOrdersById };

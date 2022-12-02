@@ -18,13 +18,14 @@ const getAll = async (_req, res) => {
   }
 };
 
-const getById = async (req, res) => {
+const getByUserId = async (req, res) => {
+  const { id } = req.params;
   try {
-    const order = await getOrdersById(req.params.id);
+    const order = await getOrdersById(id);
     return res.status(200).json(order);
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
 };
 
-module.exports = { create, getAll, getById };
+module.exports = { create, getAll, getByUserId };
