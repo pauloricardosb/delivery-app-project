@@ -17,12 +17,19 @@ const generateJWT = (values) => {
   return jwt.sign(data, secret, jwtConfig);
 };
 
-const validateToken = (token) => {
+const validateToken = (req, res, next) => {
+  const token = req.headers.authorization;
+  
+  if (!token) {
+    return res.status(401).json({ message: 'Token not found' });
+  } 
+
   try {
-    const payload = jwt.verify(token, secret);
-    return payload;
+    const decoded = jwt.verify(token, secret);
+    req.user = decoded;
+    next();
   } catch (err) {
-    throw new Error('Expired or invalid token');
+    return res.status(401).json({ message: 'Expired or invalid token' });
   }
 };
 
