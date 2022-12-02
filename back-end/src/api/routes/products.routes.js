@@ -5,6 +5,6 @@ const { validateToken } = require('../helpers/jwt');
 const router = Router();
 
 router.get('/', validateToken, getProducts);
-router.get('/:id', getProductsById);
+router.get('/:id', validateToken, getProductsById);
 
 module.exports = router;
