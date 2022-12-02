@@ -9,7 +9,6 @@ const createOrder = async (sale) => {
     deliveryNumber } = sale;
     
     const newSale = await Sale.create({
-      SaleId: userId,
       userId,
       sellerId,
       totalPrice,
@@ -19,16 +18,23 @@ const createOrder = async (sale) => {
       status: 'Pendente',
     });
 
-    const { id } = newSale;
-    return id;
+    return newSale.id;
 };
 
 const getAllOrders = async () => {
   const sales = await Sale.findAll();
 
-  if (!sales) throw new Error('No sales found');
+  if (!sales) throw new Error('Sales not found');
 
   return sales;
 };
 
-module.exports = { createOrder, getAllOrders };
+const getOrdersById = async (id) => {
+  const sale = await Sale.findByPk(id);
+
+  if (!sale) throw new Error('Sale not found');
+
+  return sale;
+};
+
+module.exports = { createOrder, getAllOrders, getOrdersById };
