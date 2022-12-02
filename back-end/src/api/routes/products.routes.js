@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const { getProductsController } = require('../controllers/products.controller');
-const { getOrderByIdController } = require('../controllers/sales.controller');
+const { getProducts, getProductsById } = require('../controllers/products.controller');
+const { validateToken } = require('../helpers/jwt');
 
 const router = Router();
 
-router.get('/products', getProductsController);
-router.post('/orders/:id', getOrderByIdController);
+router.get('/', validateToken, getProducts);
+router.get('/:id', getProductsById);
 
 module.exports = router;
