@@ -32,8 +32,6 @@ const getAllOrders = async () => {
 const getOrdersById = async (userId) => {
   const orders = await Sale.findAll({ where: { userId }, raw: true });
 
-  if (!orders) throw new Error('Sale not found');
-
   const orderResult = orders.map(({ id, saleDate, totalPrice, status }) => (
   {
     id,
@@ -42,6 +40,8 @@ const getOrdersById = async (userId) => {
     status,
   }));
 
+  if (orderResult.length === 0) throw new Error('Orders not found');
+  
   return orderResult;
 };
 

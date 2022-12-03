@@ -19,9 +19,8 @@ const getAll = async (_req, res) => {
 };
 
 const getByUserId = async (req, res) => {
-  const { id } = req.params;
   try {
-    const order = await getOrdersById(id);
+    const order = await getOrdersById(req.params.id);
     return res.status(200).json(order);
   } catch (error) {
     return res.status(404).json({ message: error.message });
