@@ -1,15 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import { validateLogin } from '../validates/validateLogin';
+import { requestLogin, setToken } from '../helpers/APIRequests';
+import { setLocalUser } from '../helpers/localStorage';
 
 function LoginComponent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [btnLogin, setBtnLogin] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
+  const [failedTryLogin, setFailedTryLogin] = useState(false);
 
   useEffect(() => {
     const login = validateLogin(email, password);
     setBtnLogin(!login);
   }, [email, password]);
+
+  const handleLogin = async () => {
+    try {
+      const result = await requestLogin('/login', { email, password });
+      const { token } = result;
+
+      setToken(token);
+
+      setLocalUser(result);
+
+      setIsLogged(true);
+    } catch (error) {
+      setFailedTryLogin(true);
+      setIsLogged(false);
+    }
+  };
+
+  if (isLogged) return <Navigate to="/customer/products" />;
 
   return (
     <div className="login">
@@ -33,6 +56,7 @@ function LoginComponent() {
           type="button"
           data-testid="common_login__button-login"
           disabled={ btnLogin }
+          onClick={ handleLogin }
         >
           LOGIN
         </button>
@@ -43,9 +67,12 @@ function LoginComponent() {
           Ainda não tenho conta.
         </button>
 
-        <p data-testid="common_login__element-invalid-email">
-          Elemento Oculto(Mensagens de erro)
-        </p>
+        {failedTryLogin ? (
+          <p data-testid="common_login__element-invalid-email">
+            usuario não cadastrado
+          </p>
+        )
+          : null}
       </div>
     </div>
   );
