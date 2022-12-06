@@ -16,7 +16,7 @@ const getUser = async (email, password) => {
 
     const { name, role } = user.dataValues; 
     // Generates token
-    const token = generateJWT({ email, role }); 
+    const token = generateJWT({ name, email, role }); 
     // API JSON response
     return { name, email, role, token }; 
   };

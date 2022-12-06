@@ -1,20 +1,16 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-const secret = process.env.JWT_SECRET || 'secret_key';
-
-const jwtConfig = {
-  expiresIn: '7d',
-  algorithm: 'HS256',
-};
+const jwtConfig = { algorithm: 'HS256', noTimestamp: true };
 
 const generateJWT = (values) => {
   const data = {
+    name: values.name,
     email: values.email,
     role: values.role,
   };
 
-  return jwt.sign(data, secret, jwtConfig);
+  return jwt.sign(data, 'secret_key', jwtConfig);
 };
 
 const validateToken = (req, res, next) => {
@@ -25,7 +21,7 @@ const validateToken = (req, res, next) => {
   } 
 
   try {
-    const decoded = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, 'secret_key');
     req.user = decoded;
     next();
   } catch (err) {
