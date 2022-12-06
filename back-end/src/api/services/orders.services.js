@@ -21,14 +21,6 @@ const createOrder = async (sale) => {
     return newSale.id;
 };
 
-const getAllOrders = async () => {
-  const sales = await Sale.findAll();
-
-  if (!sales) throw new Error('Sales not found');
-
-  return sales;
-};
-
 const getOrdersById = async (userId) => {
   const orders = await Sale.findAll({ where: { userId }, raw: true });
 
@@ -45,4 +37,4 @@ const getOrdersById = async (userId) => {
   return orderResult;
 };
 
-module.exports = { createOrder, getAllOrders, getOrdersById };
+module.exports = { createOrder, getOrdersById };

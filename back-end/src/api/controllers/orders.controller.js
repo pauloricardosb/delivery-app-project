@@ -1,4 +1,4 @@
-const { createOrder, getAllOrders, getOrdersById } = require('../services/orders.services');
+const { createOrder, getOrdersById } = require('../services/orders.services');
 
 const create = async (req, res) => {
   try {
@@ -9,22 +9,13 @@ const create = async (req, res) => {
   }
 };
 
-const getAll = async (_req, res) => {
-  try {
-    const orders = await getAllOrders();
-    return res.status(200).json(orders);
-  } catch (error) {
-    return res.status(404).json({ message: error.message });
-  }
-};
-
 const getByUserId = async (req, res) => {
   try {
-    const order = await getOrdersById(req.params.id);
+    const order = await getOrdersById(req.params.id, req.user.id);
     return res.status(200).json(order);
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
 };
 
-module.exports = { create, getAll, getByUserId };
+module.exports = { create, getByUserId };
