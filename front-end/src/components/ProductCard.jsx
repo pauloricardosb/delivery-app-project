@@ -31,7 +31,7 @@ function ProductCard() {
         <p
           data-testid={ `customer_products__element-card-price-${product.id}` }
         >
-          { product.price }
+          { (`${product.price}`).replace('.', ',') }
         </p>
         <img
           src={ product.url_image }
