@@ -10,4 +10,8 @@ export const setLocalUser = (user) => {
   localStorage.setItem('user', JSON.stringify(user));
 };
 
+export const localLogout = () => {
+  localStorage.removeItem('user');
+};
+
 export const localCheckout = () => {};

@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { localUser } from '../helpers/localStorage';
+import UserFullName from './UserFullName';
+import ButtonLogout from './ButtonLogout';
 
 function ClientNavbar() {
-  const [userName, setUserName] = useState('');
-
-  useEffect(() => {
-    const { name } = localUser();
-    setUserName(name);
-  }, []);
-
   return (
     <div>
       <Link
@@ -24,17 +18,8 @@ function ClientNavbar() {
       >
         MEUS PEDIDOS
       </Link>
-      <p
-        data-testid="customer_products__element-navbar-user-full-name"
-      >
-        { userName }
-      </p>
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-logout"
-      >
-        Sair
-      </button>
+      <UserFullName userType="customer_products" />
+      <ButtonLogout userType="customer_products" />
     </div>
   );
 }
