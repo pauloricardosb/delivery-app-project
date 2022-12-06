@@ -12,16 +12,11 @@ const getUser = async (email, password) => {
     },
   });
 
-    if (!user) {
-      throw new Error('Incorrect email or password');
-    }
+    if (!user) throw new Error('Incorrect email or password');
 
-    // Sets name and role to API JSON response
     const { name, role } = user.dataValues; 
-
     // Generates token
     const token = generateJWT({ email, role }); 
-
     // API JSON response
     return { name, email, role, token }; 
   };
