@@ -6,4 +6,8 @@ export const localUser = () => {
   return user;
 };
 
+export const setLocalUser = (user) => {
+  localStorage.setItem('user', JSON.stringify(user));
+};
+
 export const localCheckout = () => {};
