@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { requestAPI, setToken } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
+import Card from './Card';
 
 function ProductCard() {
   const [products, setProducts] = useState([]);
@@ -12,8 +13,6 @@ function ProductCard() {
       setToken(token);
 
       const productsFromDB = await requestAPI('/costumer/products');
-
-      console.log(productsFromDB);
 
       setProducts(productsFromDB);
     } catch (error) {
@@ -27,47 +26,20 @@ function ProductCard() {
 
   const productCards = () => {
     const cards = products.map((product) => (
-      <div key={ product.name }>
-        <p
-          data-testid={ `customer_products__element-card-price-${product.id}` }
-        >
-          { (`${product.price}`).replace('.', ',') }
-        </p>
-        <img
-          src={ product.url_image }
-          alt={ product.name }
-          data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-        />
-        <p
-          data-testid={ `customer_products__element-card-title-${product.id}` }
-        >
-          { product.name }
-        </p>
-        <button
-          type="button"
-          data-testid={ `customer_products__button-card-rm-item-${product.id}` }
-        >
-          -
-        </button>
-        <input
-          type="number"
-          placeholder="0"
-          data-testid={ `customer_products__input-card-quantity-${product.id}` }
-        />
-        <button
-          type="button"
-          data-testid={ `customer_products__button-card-add-item-${product.id}` }
-        >
-          +
-        </button>
-      </div>
+      <Card
+        key={ product.name }
+        id={ product.id }
+        name={ product.name }
+        price={ product.price }
+        image={ product.url_image }
+      />
     ));
     return cards;
   };
 
   return (
     <div>
-      { products ? productCards() : null }
+      { products.length > 0 ? productCards() : null }
     </div>
   );
 }
