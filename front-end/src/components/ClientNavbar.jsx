@@ -13,25 +13,25 @@ function ClientNavbar() {
   return (
     <div>
       <Link
-        to="/costumer/products"
-        data-testid="costumer_products__element-navbar-link-products"
+        to="/customer/products"
+        data-testid="customer_products__element-navbar-link-products"
       >
         PRODUTOS
       </Link>
       <Link
         to="/costumer/orders"
-        data-testid="costumer_products__element-navbar-link-orders"
+        data-testid="customer_products__element-navbar-link-orders"
       >
         MEUS PEDIDOS
       </Link>
       <p
-        data-testid="costumer_products__element-navbar-user-full-name"
+        data-testid="customer_products__element-navbar-user-full-name"
       >
         { userName }
       </p>
       <button
         type="button"
-        data-testid="costumer_products__element-navbar-link-logout"
+        data-testid="customer_products__element-navbar-link-logout"
       >
         Sair
       </button>

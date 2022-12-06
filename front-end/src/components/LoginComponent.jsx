@@ -32,7 +32,7 @@ function LoginComponent() {
     }
   };
 
-  if (isLogged) return <Navigate to="/costumer/products" />;
+  if (isLogged) return <Navigate to="/customer/products" />;
 
   return (
     <div className="login">

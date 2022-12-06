@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/login" index element={ <Login /> } />
         <Route path="/" element={ <Navigate to="/login" replace /> } />
-        <Route path="/costumer/products" element={ <Products /> } />
+        <Route path="/customer/products" element={ <Products /> } />
       </Routes>
     </BrowserRouter>
   );
