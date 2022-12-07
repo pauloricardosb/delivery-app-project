@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import { validateLogin } from '../validates/validateLogin';
 import { requestLogin, setToken } from '../helpers/APIRequests';
 import { setLocalUser } from '../helpers/localStorage';
@@ -60,19 +60,18 @@ function LoginComponent() {
         >
           LOGIN
         </button>
-        <button
-          type="button"
-          data-testid="common_login__button-register"
-        >
-          Ainda não tenho conta.
+        <button type="button" data-testid="common_login__button-register">
+          <Link to="/register">
+            Ainda não tenho conta.
+          </Link>
         </button>
 
-        {failedTryLogin ? (
+        { failedTryLogin ? (
           <p data-testid="common_login__element-invalid-email">
             usuario não cadastrado
           </p>
         )
-          : null}
+          : null }
       </div>
     </div>
   );
