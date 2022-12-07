@@ -30,7 +30,7 @@ const { userId, sellerId, deliveryAddress, deliveryNumber, productId, quantity }
   return newSale.id;
 };
 
-const getOrdersById = async (userId) => {
+const getOrdersByUserId = async (userId) => {
   const orders = await Sale.findAll({
     where: { userId },
     include: [
@@ -53,4 +53,12 @@ const getOrdersById = async (userId) => {
   return orderResult;
 };
 
-module.exports = { createOrder, getOrdersById };
+const getOrdersByOrdersId = async (orderId) => {
+  const order = await Sale.findByPk(orderId);
+
+  if (!order) throw new Error('Order not found');
+
+  return order;
+};
+
+module.exports = { createOrder, getOrdersByUserId, getOrdersByOrdersId };
