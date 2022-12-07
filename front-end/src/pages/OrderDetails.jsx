@@ -73,7 +73,7 @@ function OrderDetails() {
           </button>
         </div>
         <div>
-          {/* { orderProducts() } */}
+          { orderProducts() }
         </div>
         <div>
           <p
