@@ -18,7 +18,7 @@ function OrderDetails() {
 
         setToken(token);
 
-        const requestOrder = await requestAPI(`/costumer/orders/${id}`);
+        const requestOrder = await requestAPI(`/costumer/orders/details/${id}`);
 
         setOrder(requestOrder);
       } catch (error) {
