@@ -17,21 +17,22 @@ const salesProductsNN = async (saleId, productId, quantity) => {
 };
 
 const createOrder = async (sale) => {
-  const { userName, sellerId, deliveryAddress, deliveryNumber, productId, quantity } = sale;
-
-  const { price } = await Product.findByPk(productId);
+  const { userName, sellerId, deliveryAddress, deliveryNumber, totalPrice, products } = sale;
 
   const newSale = await Sale.create({
     userId: await findUserId(userName),
     sellerId,
-    totalPrice: price * quantity,
+    totalPrice,
     deliveryAddress,
     deliveryNumber,
     saleDate: new Date(),
     status: 'Pendente',
   });
 
-  await salesProductsNN(newSale.id, productId, quantity);
+  products.forEach(async (product) => {
+    await salesProductsNN(newSale.id, product.id, product.quantity);
+  });
+
   return newSale.id;
 };
 
