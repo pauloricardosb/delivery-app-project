@@ -7,7 +7,7 @@ import ProductOrderCard from '../components/ProductOrderCard';
 const orderDetails = 'customer_order_details__element-order-details';
 
 function OrderDetails() {
-  const [order, setOrder] = useState({});
+  const [order, setOrder] = useState(null);
 
   const { id } = useParams();
 
@@ -56,7 +56,7 @@ function OrderDetails() {
           <p
             data-testid={ `${orderDetails}-label-seller-name` }
           >
-            { `P. Vend: ${'Vendedor'}` }
+            { `P. Vend: ${order.sellerName}` }
           </p>
           <p
             data-testid={ `${orderDetails}-label-delivery-status` }

@@ -39,9 +39,9 @@ ProductOrderCard.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
   }).isRequired,
-  index: PropTypes.number.isRequired,
+  index: PropTypes.bool.isRequired,
 };
 
 export default ProductOrderCard;
