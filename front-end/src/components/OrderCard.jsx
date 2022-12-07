@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment/moment';
+import { Link } from 'react-router-dom';
 
 function OrderCard({ order: { id, status, saleDate, totalPrice } }) {
   return (
-    <div>
+    <Link to={ `/customer/orders/${id}` }>
       <div>
         <p
           data-testid={ `customer_products__element-order-id-${id}` }
@@ -31,7 +32,7 @@ function OrderCard({ order: { id, status, saleDate, totalPrice } }) {
           { totalPrice.replace('.', ',') }
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
 

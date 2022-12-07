@@ -9,7 +9,7 @@ function Orders() {
 
   const fetchOrders = async () => {
     try {
-      const { token } = localUser();
+      const { name, token } = localUser();
 
       setToken(token);
 
