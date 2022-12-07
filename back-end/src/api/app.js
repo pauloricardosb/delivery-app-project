@@ -15,7 +15,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/login', loginRouter); 
 app.use('/register', registerRouter);
 app.use('/costumer/products', productsRouter);
-app.use('/costumer/', ordersRouter);
+app.use('/costumer/orders', ordersRouter);
 app.use('/images', imagesRouter);
 
 module.exports = app;
