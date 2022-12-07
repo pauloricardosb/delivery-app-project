@@ -20,9 +20,7 @@ function OrderDetails() {
 
         const requestOrder = await requestAPI(`/costumer/orders/${id}`);
 
-        console.log(requestOrder[0]);
-
-        setOrder(requestOrder[0]);
+        setOrder(requestOrder);
       } catch (error) {
         setOrder({});
       }
