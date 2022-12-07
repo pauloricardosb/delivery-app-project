@@ -1,4 +1,12 @@
-const { Sale, Product, SaleProduct } = require('../../database/models');
+const { Sale, Product, SaleProduct, User } = require('../../database/models');
+
+const findUserId = async (userName) => {
+  const user = await User.findOne({ where: { name: userName } });
+
+  if (!user) throw new Error('User not found');
+
+  return user.id;
+};
 
 const salesProductsNN = async (saleId, productId, quantity) => {
   await SaleProduct.create({
@@ -9,16 +17,14 @@ const salesProductsNN = async (saleId, productId, quantity) => {
 };
 
 const createOrder = async (sale) => {
-const { userId, sellerId, deliveryAddress, deliveryNumber, productId, quantity } = sale;
+const { userName, sellerId, deliveryAddress, deliveryNumber, productId, quantity } = sale;
 
   const productPrice = await Product.findByPk(productId);
   const { price } = productPrice.dataValues;
 
   const newSale = await Sale.create({
-    userId,
+    userId: await findUserId(userName),
     sellerId,
-    productId,
-    quantity,
     totalPrice: price * quantity,
     deliveryAddress,
     deliveryNumber,
@@ -31,21 +37,13 @@ const { userId, sellerId, deliveryAddress, deliveryNumber, productId, quantity }
 };
 
 const getOrdersByUserId = async (userId) => {
-  const orders = await Sale.findAll({
-    where: { userId },
-    include: [
-      {
-        model: Product,
-        as: 'products',
-      },
-    ],
-  });
+  const orders = await Sale.findAll({ where: { userId } });
 
   const orderResult = orders.map(({ id, saleDate, totalPrice, status }) => ({
     id,
     saleDate: saleDate.toLocaleDateString('pt-BR'),
-    totalPrice,
     status,
+    totalPrice,
   }));
 
   if (orderResult.length === 0) throw new Error('Orders not found');
@@ -55,10 +53,19 @@ const getOrdersByUserId = async (userId) => {
 
 const getOrdersByOrdersId = async (orderId) => {
   const order = await Sale.findByPk(orderId);
+  const sellerName = await User.findByPk(order.sellerId);
+
+  const orderResult = {
+    id: order.id,
+    sellerName: sellerName.name,
+    saleDate: order.saleDate.toLocaleDateString('pt-BR'),
+    status: order.status,
+    totalPrice: order.totalPrice,
+  };
 
   if (!order) throw new Error('Order not found');
 
-  return order;
+  return orderResult;
 };
 
 module.exports = { createOrder, getOrdersByUserId, getOrdersByOrdersId };

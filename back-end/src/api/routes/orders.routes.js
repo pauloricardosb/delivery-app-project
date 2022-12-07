@@ -6,6 +6,6 @@ const router = Router();
 
 router.get('/orders/user/:id', validateToken, getByUserId);
 router.get('/orders/:id', validateToken, getByOrderId);
-router.post('/', validateToken, create);
+router.post('/orders', validateToken, create);
 
 module.exports = router;
