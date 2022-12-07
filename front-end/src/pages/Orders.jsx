@@ -13,7 +13,7 @@ function Orders() {
 
       setToken(token);
 
-      const requestOrders = await requestAPI(`/costumer/orders/${3}`);
+      const requestOrders = await requestAPI(`/costumer/orders/${name}`);
 
       setOrders(requestOrders);
     } catch (error) {
