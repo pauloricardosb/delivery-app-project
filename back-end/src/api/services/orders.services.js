@@ -1,48 +1,85 @@
-const { Sale } = require('../../database/models');
+const { Sale, Product, SaleProduct, User } = require('../../database/models');
+
+const findUserId = async (userName) => {
+  const user = await User.findOne({ where: { name: userName } });
+
+  if (!user) throw new Error('User not found');
+
+  return user.id;
+};
+
+const salesProductsNN = async (saleId, productId, quantity) => {
+  await SaleProduct.create({
+    saleId,
+    productId,
+    quantity,
+  });
+};
 
 const createOrder = async (sale) => {
-  const { 
-    userId, 
+  const { userName, sellerId, deliveryAddress, deliveryNumber, totalPrice, products } = sale;
+
+  const newSale = await Sale.create({
+    userId: await findUserId(userName),
     sellerId,
-    totalPrice, 
+    totalPrice,
     deliveryAddress,
-    deliveryNumber } = sale;
-    
-    const newSale = await Sale.create({
-      userId,
-      sellerId,
-      totalPrice,
-      deliveryAddress,
-      deliveryNumber,
-      saleDate: new Date(),
-      status: 'Pendente',
-    });
+    deliveryNumber,
+    saleDate: new Date(),
+    status: 'Pendente',
+  });
 
-    return newSale.id;
+  products.forEach(async (product) => {
+    await salesProductsNN(newSale.id, product.id, product.quantity);
+  });
+
+  return newSale.id;
 };
 
-const getAllOrders = async () => {
-  const sales = await Sale.findAll();
+const getOrdersByUserName = async (userName) => {
+  const userId = await findUserId(userName);
+  const orders = await Sale.findAll({ where: { userId } });
 
-  if (!sales) throw new Error('Sales not found');
-
-  return sales;
-};
-
-const getOrdersById = async (userId) => {
-  const orders = await Sale.findAll({ where: { userId }, raw: true });
-
-  const orderResult = orders.map(({ id, saleDate, totalPrice, status }) => (
-  {
+  const orderResult = orders.map(({ id, saleDate, totalPrice, status }) => ({
     id,
     saleDate: saleDate.toLocaleDateString('pt-BR'),
-    totalPrice,
     status,
+    totalPrice,
   }));
 
   if (orderResult.length === 0) throw new Error('Orders not found');
-  
+
   return orderResult;
 };
 
-module.exports = { createOrder, getAllOrders, getOrdersById };
+const productArray = async (orderId) => { 
+  const products = await SaleProduct.findAll({ where: { saleId: orderId } });
+
+  const array = products.map(async ({ productId, quantity }) => {
+    const { name, price } = await Product.findByPk(productId);
+    return { productId, name, quantity, price };
+  });
+  return Promise.all(array);
+};
+
+const getOrdersByOrdersId = async (orderId) => {
+  const order = await Sale.findByPk(orderId);
+  const sellerName = await User.findByPk(order.sellerId);
+
+  const products = await productArray(orderId);
+
+  const orderResult = {
+    id: order.id,
+    sellerName: sellerName.name,
+    saleDate: order.saleDate.toLocaleDateString('pt-BR'),
+    status: order.status,
+    totalPrice: order.totalPrice,
+    products,
+  };
+
+  if (!order) throw new Error('Order not found');
+
+  return orderResult;
+};
+
+module.exports = { createOrder, getOrdersByUserName, getOrdersByOrdersId };

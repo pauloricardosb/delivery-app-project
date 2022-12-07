@@ -1,11 +1,11 @@
 const { Router } = require('express');
-const { create, getAll, getByUserId } = require('../controllers/orders.controller');
+const { create, getByUserName, getByOrderId } = require('../controllers/orders.controller');
 const { validateToken } = require('../helpers/jwt');
 
 const router = Router();
 
-router.get('/', validateToken, getAll);
-router.get('/:id', validateToken, getByUserId);
+router.get('/:name', validateToken, getByUserName);
+router.get('/details/:id', validateToken, getByOrderId);
 router.post('/', validateToken, create);
 
 module.exports = router;

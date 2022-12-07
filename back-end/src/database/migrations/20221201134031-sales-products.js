@@ -7,10 +7,10 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'sales',
-          key: 'id'
-        },
+        // references: {
+        //   model: 'sales',
+        //   key: 'id'
+        // },
       },
       product_id: {
         primaryKey: true,

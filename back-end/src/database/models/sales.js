@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Sale.associate = (models) => {
         Sale.belongsTo(models.User, {
-            foreignKey: 'userId', as: 'user'
+            foreignKey: 'userId', as: 'user_id'
         });
         Sale.belongsTo(models.User, {
             foreignKey: 'sellerId', as: 'seller_id'
