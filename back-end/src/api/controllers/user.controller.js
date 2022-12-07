@@ -12,6 +12,7 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   try {
+    console.log(req.body);
     const newUser = await registerUser(req.body); 
     res.status(201).json(newUser);
   } catch (error) {
