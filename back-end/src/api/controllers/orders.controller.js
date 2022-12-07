@@ -1,6 +1,6 @@
 const { 
   createOrder,
-  getOrdersByUserId, 
+  getOrdersByUserName, 
   getOrdersByOrdersId, 
 } = require('../services/orders.services');
 
@@ -13,9 +13,9 @@ const create = async (req, res) => {
   }
 };
 
-const getByUserId = async (req, res) => {
+const getByUserName = async (req, res) => {
   try {
-    const order = await getOrdersByUserId(req.params.id);
+    const order = await getOrdersByUserName(req.params.name);
     return res.status(200).json(order);
   } catch (error) {
     return res.status(404).json({ message: error.message });
@@ -31,4 +31,4 @@ const getByOrderId = async (req, res) => {
   }
 };
 
-module.exports = { create, getByUserId, getByOrderId };
+module.exports = { create, getByUserName, getByOrderId };

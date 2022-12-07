@@ -17,10 +17,9 @@ const salesProductsNN = async (saleId, productId, quantity) => {
 };
 
 const createOrder = async (sale) => {
-const { userName, sellerId, deliveryAddress, deliveryNumber, productId, quantity } = sale;
+  const { userName, sellerId, deliveryAddress, deliveryNumber, productId, quantity } = sale;
 
-  const productPrice = await Product.findByPk(productId);
-  const { price } = productPrice.dataValues;
+  const { price } = await Product.findByPk(productId);
 
   const newSale = await Sale.create({
     userId: await findUserId(userName),
@@ -31,12 +30,13 @@ const { userName, sellerId, deliveryAddress, deliveryNumber, productId, quantity
     saleDate: new Date(),
     status: 'Pendente',
   });
-  
+
   await salesProductsNN(newSale.id, productId, quantity);
   return newSale.id;
 };
 
-const getOrdersByUserId = async (userId) => {
+const getOrdersByUserName = async (userName) => {
+  const userId = await findUserId(userName);
   const orders = await Sale.findAll({ where: { userId } });
 
   const orderResult = orders.map(({ id, saleDate, totalPrice, status }) => ({
@@ -51,9 +51,21 @@ const getOrdersByUserId = async (userId) => {
   return orderResult;
 };
 
+const productArray = async (orderId) => { 
+  const products = await SaleProduct.findAll({ where: { saleId: orderId } });
+
+  const array = products.map(async ({ productId, quantity }) => {
+    const { name, price } = await Product.findByPk(productId);
+    return { productId, name, quantity, price };
+  });
+  return Promise.all(array);
+};
+
 const getOrdersByOrdersId = async (orderId) => {
   const order = await Sale.findByPk(orderId);
   const sellerName = await User.findByPk(order.sellerId);
+
+  const products = await productArray(orderId);
 
   const orderResult = {
     id: order.id,
@@ -61,6 +73,7 @@ const getOrdersByOrdersId = async (orderId) => {
     saleDate: order.saleDate.toLocaleDateString('pt-BR'),
     status: order.status,
     totalPrice: order.totalPrice,
+    products,
   };
 
   if (!order) throw new Error('Order not found');
@@ -68,4 +81,4 @@ const getOrdersByOrdersId = async (orderId) => {
   return orderResult;
 };
 
-module.exports = { createOrder, getOrdersByUserId, getOrdersByOrdersId };
+module.exports = { createOrder, getOrdersByUserName, getOrdersByOrdersId };
