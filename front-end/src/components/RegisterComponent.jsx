@@ -1,13 +1,37 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
+import { api } from '../helpers/APIRequests';
 
 function RegisterComponent() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
     password: '',
   });
-  const [failedTryRegister] = useState(false);
+
+  const [failedTryRegister, setFailedTryRegister] = useState(false);
+
+  async function hadleRegister() {
+    const { nome, email, password } = formData;
+    try {
+      const { data } = await api({
+        url: '/register',
+        method: 'post',
+        data: {
+          name: nome,
+          email,
+          password,
+        },
+      });
+      setToken(data.token);
+      setLocalUser(data.user);
+      navigate('/customer/products');
+    } catch (e) {
+      setFailedTryRegister(true);
+    }
+  }
 
   function isButtonDisabled() {
     const { nome, email, password } = formData;
@@ -69,13 +93,14 @@ function RegisterComponent() {
         type="button"
         data-testid="common_register__button-register"
         disabled={ isButtonDisabled() }
+        onClick={ hadleRegister }
       >
         CADASTRAR
       </button>
       {
         failedTryRegister && (
           <p data-testid="common_register__element-invalid_register">
-            usuario não cadastrado
+            Falha ao cadastrar usuário
           </p>
         )
       }

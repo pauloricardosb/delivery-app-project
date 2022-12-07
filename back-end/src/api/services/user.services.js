@@ -34,10 +34,16 @@ const registerUser = async ({ name, role = 'customer', email, password }) => {
     const { dataValues: newUser } = await User
       .create({ name, role, email, password: md5(password) });
     
-    return { 
-      name: newUser.name,
-      email: newUser.email,
-      role: newUser.role,
+    // Generates token
+    const token = generateJWT({ name, email, role }); 
+
+    return {
+      user: {
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role,
+      },
+      token,
     };
   };
 
