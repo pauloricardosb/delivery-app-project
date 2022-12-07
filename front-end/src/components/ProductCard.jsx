@@ -12,9 +12,9 @@ function ProductCard() {
 
       setToken(token);
 
-      const productsFromDB = await requestAPI('/costumer/products');
+      const requestProducts = await requestAPI('/costumer/products');
 
-      setProducts(productsFromDB);
+      setProducts(requestProducts);
     } catch (error) {
       return [];
     }
