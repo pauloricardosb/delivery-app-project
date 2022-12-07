@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
-import { api } from '../helpers/APIRequests';
+import { requestRegister, setToken } from '../helpers/APIRequests';
+import { setLocalUser } from '../helpers/localStorage';
 
 function RegisterComponent() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    nome: '',
+    name: '',
     email: '',
     password: '',
   });
@@ -14,19 +15,12 @@ function RegisterComponent() {
   const [failedTryRegister, setFailedTryRegister] = useState(false);
 
   async function hadleRegister() {
-    const { nome, email, password } = formData;
+    const { name, email, password } = formData;
     try {
-      const { data } = await api({
-        url: '/register',
-        method: 'post',
-        data: {
-          name: nome,
-          email,
-          password,
-        },
-      });
+      const data = await requestRegister('/register', { name, email, password });
+      console.log(data);
       setToken(data.token);
-      setLocalUser(data.user);
+      setLocalUser(data);
       navigate('/customer/products');
     } catch (e) {
       setFailedTryRegister(true);
@@ -34,11 +28,11 @@ function RegisterComponent() {
   }
 
   function isButtonDisabled() {
-    const { nome, email, password } = formData;
+    const { name, email, password } = formData;
     const MIN_CHARACTERS_NAME = 12;
     const MIN_CHARACTERS_PASS = 6;
     return (password.length < MIN_CHARACTERS_PASS)
-      || (nome.length < MIN_CHARACTERS_NAME)
+      || (name.length < MIN_CHARACTERS_NAME)
       || (!validator.isEmail(email));
   }
 
@@ -50,11 +44,11 @@ function RegisterComponent() {
           type="text"
           id="common_register__input-name"
           data-testid="common_register__input-name"
-          value={ formData.nome }
+          value={ formData.name }
           onChange={
             (e) => setFormData((current) => ({
               ...current,
-              nome: e.target.value,
+              name: e.target.value,
             }))
           }
         />
