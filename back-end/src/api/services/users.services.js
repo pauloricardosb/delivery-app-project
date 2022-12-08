@@ -4,7 +4,7 @@ const { User } = require('../../database/models');
 const getAll = async () => {
   const users = await User.findAll({
     where: { role: { [Op.not]: ['administrator'] } },
-    attributes: ['name', 'email', 'role'],
+    attributes: ['id', 'name', 'email', 'role'],
   });
 
   if (!users) throw new Error('Users not found');
@@ -12,4 +12,10 @@ const getAll = async () => {
   return users;
 };
 
-module.exports = { getAll };
+const deleteOne = async (id) => {
+  await User.destroy({
+    where: { id },
+  });
+};
+
+module.exports = { getAll, deleteOne };

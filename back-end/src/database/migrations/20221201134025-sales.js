@@ -13,11 +13,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id'},
         allowNull: false,
+        onDelete: 'CASCADE',
       },
       seller_id: {
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id' },
         allowNull: false,
+        onDelete: 'CASCADE',
       },
       total_price: {
         type: Sequelize.DECIMAL(9, 2),

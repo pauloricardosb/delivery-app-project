@@ -1,4 +1,4 @@
-const { getAll } = require('../services/users.services');
+const { getAll, deleteOne } = require('../services/users.services');
 
 const getUsers = async (_req, res) => {
   try {
@@ -9,4 +9,14 @@ const getUsers = async (_req, res) => {
   }
 };
 
-module.exports = { getUsers };
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await deleteOne(id);
+    res.status(202).send();
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+module.exports = { getUsers, deleteUser };

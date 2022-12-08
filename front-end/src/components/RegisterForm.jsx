@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import validator from 'validator';
 import { requestRegister, setToken } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
 
-function RegisterForm() {
+function RegisterForm({ fetch }) {
   const [failedTryRegister, setFailedTryRegister] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -20,6 +21,15 @@ function RegisterForm() {
       setToken(token);
 
       await requestRegister('/register', { name, email, password, role });
+
+      setFormData({
+        name: '',
+        email: '',
+        password: '',
+        role: 'role',
+      });
+
+      fetch();
     } catch (e) {
       setFailedTryRegister(true);
     }
@@ -118,5 +128,9 @@ function RegisterForm() {
     </div>
   );
 }
+
+RegisterForm.propTypes = {
+  fetch: PropTypes.func.isRequired,
+};
 
 export default RegisterForm;

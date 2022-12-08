@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { requestAPI, setToken } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
+import RegisterForm from './RegisterForm';
 import UserRow from './UserRow';
 
 function UserManage() {
@@ -30,6 +31,7 @@ function UserManage() {
         key={ index }
         user={ user }
         index={ index }
+        fetch={ fetchUsers }
       />
     ));
 
@@ -38,6 +40,7 @@ function UserManage() {
 
   return (
     <div>
+      <RegisterForm fetch={ fetchUsers } />
       <table>
         <thead>
           <tr>
