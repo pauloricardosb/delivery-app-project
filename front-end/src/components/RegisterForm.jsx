@@ -19,7 +19,7 @@ function RegisterForm() {
 
       setToken(token);
 
-      await requestRegister('/register/admin', { name, email, password, role });
+      await requestRegister('/register', { name, email, password, role });
     } catch (e) {
       setFailedTryRegister(true);
     }
@@ -110,7 +110,7 @@ function RegisterForm() {
       </button>
       {
         failedTryRegister && (
-          <p data-testid="admin_manage__element-invalid_register">
+          <p data-testid="admin_manage__element-invalid-register">
             Falha ao cadastrar usuário
           </p>
         )
