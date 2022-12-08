@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { validateLogin } from '../validates/validateLogin';
 import { requestLogin, setToken } from '../helpers/APIRequests';
-import { setLocalUser } from '../helpers/localStorage';
+import { localUser, setLocalUser } from '../helpers/localStorage';
 
 function LoginComponent() {
   const [email, setEmail] = useState('');
@@ -32,7 +32,19 @@ function LoginComponent() {
     }
   };
 
-  if (isLogged) return <Navigate to="/customer/products" />;
+  if (isLogged) {
+    const { role } = localUser();
+    let url = '';
+    switch (role) {
+    case 'administrator':
+      url = '/admin/manage';
+      break;
+    default:
+      url = '/customer/products';
+      break;
+    }
+    return <Navigate to={ url } />;
+  }
 
   return (
     <div className="login">
