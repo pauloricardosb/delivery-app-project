@@ -18,7 +18,6 @@ function RegisterComponent() {
     const { name, email, password } = formData;
     try {
       const data = await requestRegister('/register', { name, email, password });
-      console.log(data);
       setToken(data.token);
       setLocalUser(data);
       navigate('/customer/products');

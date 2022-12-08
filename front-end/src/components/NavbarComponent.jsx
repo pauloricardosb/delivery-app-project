@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ClientNavbar from './ClientNavbar';
+import AdminNavbar from './AdminNavbar';
 import { localUser } from '../helpers/localStorage';
 
 function NavbarComponent() {
@@ -13,6 +14,8 @@ function NavbarComponent() {
   const navBar = () => {
     if (userRole === 'customer') {
       return <ClientNavbar />;
+    } if (userRole === 'administrator') {
+      return <AdminNavbar />;
     }
   };
 
