@@ -31,7 +31,7 @@ function RegisterForm() {
     const MIN_CHARACTERS_PASS = 6;
     return (password.length < MIN_CHARACTERS_PASS)
       || (name.length < MIN_CHARACTERS_NAME)
-      || (role !== 'role')
+      || (role === 'role')
       || (!validator.isEmail(email));
   };
 
