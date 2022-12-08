@@ -1,5 +1,7 @@
 const { Sale, Product, SaleProduct, User } = require('../../database/models');
 
+// Helper functions
+
 const findUserId = async (userName) => {
   const user = await User.findOne({ where: { name: userName } });
 
@@ -15,6 +17,18 @@ const salesProductsNN = async (saleId, productId, quantity) => {
     quantity,
   });
 };
+
+const productArray = async (orderId) => { 
+  const products = await SaleProduct.findAll({ where: { saleId: orderId } });
+
+  const array = products.map(async ({ productId, quantity }) => {
+    const { name, price } = await Product.findByPk(productId);
+    return { productId, name, quantity, price };
+  });
+  return Promise.all(array);
+};
+
+// Services
 
 const createOrder = async (sale) => {
   const { userName, sellerId, deliveryAddress, deliveryNumber, totalPrice, products } = sale;
@@ -52,16 +66,6 @@ const getOrdersByUserName = async (userName) => {
   return orderResult;
 };
 
-const productArray = async (orderId) => { 
-  const products = await SaleProduct.findAll({ where: { saleId: orderId } });
-
-  const array = products.map(async ({ productId, quantity }) => {
-    const { name, price } = await Product.findByPk(productId);
-    return { productId, name, quantity, price };
-  });
-  return Promise.all(array);
-};
-
 const getOrdersByOrdersId = async (orderId) => {
   const order = await Sale.findByPk(orderId);
   const sellerName = await User.findByPk(order.sellerId);
@@ -82,4 +86,22 @@ const getOrdersByOrdersId = async (orderId) => {
   return orderResult;
 };
 
-module.exports = { createOrder, getOrdersByUserName, getOrdersByOrdersId };
+const updateOrderStatus = async (orderId, status) => {
+  try {
+    const order = await Sale.findByPk(orderId);
+    if (!order) throw new Error('Order not found');
+
+    await Sale.update({ status }, { where: { id: orderId } });
+
+    return { id: orderId, status };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+module.exports = { 
+  createOrder, 
+  getOrdersByUserName,
+  getOrdersByOrdersId,
+  updateOrderStatus, 
+};
