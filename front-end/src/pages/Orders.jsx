@@ -30,6 +30,7 @@ function Orders() {
       <OrderCard
         key={ index }
         order={ order }
+        userType="customer_products"
       />
     ));
 

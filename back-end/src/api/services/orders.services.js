@@ -52,6 +52,22 @@ const getOrdersByUserName = async (userName) => {
   return orderResult;
 };
 
+const getOrdersBySellerName = async (sellerName) => {
+  const sellerId = await findUserId(sellerName);
+  const orders = await Sale.findAll({ where: { sellerId } });
+
+  const orderResult = orders.map(({ id, saleDate, totalPrice, status }) => ({
+    id,
+    saleDate: saleDate.toLocaleDateString('pt-BR'),
+    status,
+    totalPrice,
+  }));
+
+  if (orderResult.length === 0) throw new Error('Orders not found');
+
+  return orderResult;
+};
+
 const productArray = async (orderId) => { 
   const products = await SaleProduct.findAll({ where: { saleId: orderId } });
 
@@ -82,4 +98,4 @@ const getOrdersByOrdersId = async (orderId) => {
   return orderResult;
 };
 
-module.exports = { createOrder, getOrdersByUserName, getOrdersByOrdersId };
+module.exports = { createOrder, getOrdersByUserName, getOrdersByOrdersId, getOrdersBySellerName };

@@ -19,20 +19,26 @@ function LoginComponent() {
   const handleLogin = async () => {
     try {
       const result = await requestLogin('/login', { email, password });
-      const { token } = result;
+      const { token, role } = result;
 
       setToken(token);
 
       setLocalUser(result);
 
       setIsLogged(true);
+
+      if (isLogged && role === 'customer') {
+        return <Navigate to="/customer/products" />;
+      }
+
+      if (isLogged && role === 'seller') {
+        return <Navigate to="/seller/orders" />;
+      }
     } catch (error) {
       setFailedTryLogin(true);
       setIsLogged(false);
     }
   };
-
-  if (isLogged) return <Navigate to="/customer/products" />;
 
   return (
     <div className="login">
