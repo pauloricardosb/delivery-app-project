@@ -29,4 +29,19 @@ const newUser = {
   token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTm92byBVc8O6YXJpbyIsImVtYWlsIjoidXN1YXJpb0BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciJ9.Xs4Pf7TbZSqfH9RzVlBrh_wP2vLJyMGeQoA3EFrbK-M',
 };
 
-module.exports = { users, newUser };
+const usersDB = [
+  {
+    id: 2,
+    name: 'Fulana Pereira',
+    email: 'fulana@deliveryapp.com',
+    role: 'seller',
+  },
+  {
+    id: 3,
+    name: 'Cliente Zé Birita',
+    email: 'zebirita@email.com',
+    role: 'customer',
+  },
+];
+
+module.exports = { users, newUser, usersDB };
