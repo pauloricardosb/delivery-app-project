@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../components/NavbarComponent';
-import { requestAPI, setToken } from '../helpers/APIRequests';
-import { localUser } from '../helpers/localStorage';
+import NavbarComponent from '../components/NavbarComponent';
 import OrderCard from '../components/OrderCard';
+import { requestSellerOrders } from '../helpers/APIRequests';
 
-function Orders() {
+function SellerOrders() {
   const [orders, setOrders] = useState([]);
 
   const fetchOrders = async () => {
@@ -13,7 +11,7 @@ function Orders() {
 
       setToken(token);
 
-      const requestOrders = await requestAPI(`/costumer/orders/${name}`);
+      const requestOrders = await requestSellerOrders('/seller/orders/', { name });
 
       setOrders(requestOrders);
     } catch (error) {
@@ -30,7 +28,7 @@ function Orders() {
       <OrderCard
         key={ index }
         order={ order }
-        userType="customer_products"
+        userType="seller_orders"
       />
     ));
 
@@ -39,7 +37,7 @@ function Orders() {
 
   return (
     <div>
-      <Navbar />
+      <NavbarComponent />
       <main>
         { orders.length > 0 ? orderCards() : null }
       </main>
@@ -47,4 +45,4 @@ function Orders() {
   );
 }
 
-export default Orders;
+export default SellerOrders;

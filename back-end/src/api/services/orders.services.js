@@ -103,5 +103,5 @@ module.exports = {
   createOrder, 
   getOrdersByUserName,
   getOrdersByOrdersId,
-  updateOrderStatus, 
+  updateOrderStatus,
 };
