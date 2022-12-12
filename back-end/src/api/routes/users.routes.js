@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getUsers, deleteUser } = require('../controllers/users.controller');
+const { getUsers, deleteUser } = require('../controllers/user.controller');
 const { validateToken } = require('../helpers/jwt');
 
 const router = Router();
