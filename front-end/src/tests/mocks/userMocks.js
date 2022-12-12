@@ -20,4 +20,13 @@ const users = [
   },
 ];
 
-module.exports = { users };
+const newUser = {
+  user: {
+    name: 'Novo Usuário',
+    email: 'usuario@mail.com',
+    role: 'customer',
+  },
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTm92byBVc8O6YXJpbyIsImVtYWlsIjoidXN1YXJpb0BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciJ9.Xs4Pf7TbZSqfH9RzVlBrh_wP2vLJyMGeQoA3EFrbK-M',
+};
+
+module.exports = { users, newUser };
