@@ -2,7 +2,8 @@ const {
   createOrder,
   getOrdersByUserName, 
   getOrdersByOrdersId,
-  getOrdersBySellerName, 
+  getOrdersBySellerName,
+  updateOrderStatus,
 } = require('../services/orders.services');
 
 const create = async (req, res) => {
@@ -41,4 +42,13 @@ const getByOrderId = async (req, res) => {
   }
 };
 
-module.exports = { create, getByUserName, getByOrderId, getBySellerName, getByUserName };
+const updateStatus = async (req, res) => {
+  try {
+    const order = await updateOrderStatus(req.params.id, req.body.status);
+    return res.status(200).json(order);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
+module.exports = { create, getByUserName, getByOrderId, updateStatus, getBySellerName };
