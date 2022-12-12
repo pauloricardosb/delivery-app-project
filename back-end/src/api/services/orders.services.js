@@ -66,22 +66,6 @@ const getOrdersByUserName = async (userName) => {
   return orderResult;
 };
 
-const getOrdersBySellerName = async (sellerName) => {
-  const sellerId = await findUserId(sellerName);
-  const orders = await Sale.findAll({ where: { sellerId } });
-
-  const sellerOrderResult = orders.map(({ id, saleDate, totalPrice, status }) => ({
-    id,
-    saleDate: saleDate.toLocaleDateString('pt-BR'),
-    status,
-    totalPrice,
-  }));
-
-  if (sellerOrderResult.length === 0) throw new Error('Orders not found');
-
-  return sellerOrderResult;
-};
-
 const getOrdersByOrdersId = async (orderId) => {
   const order = await Sale.findByPk(orderId);
   const sellerName = await User.findByPk(order.sellerId);
@@ -120,5 +104,4 @@ module.exports = {
   getOrdersByUserName,
   getOrdersByOrdersId,
   updateOrderStatus,
-  getOrdersBySellerName,
 };

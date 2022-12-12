@@ -2,9 +2,9 @@ const {
   createOrder,
   getOrdersByUserName, 
   getOrdersByOrdersId,
-  getOrdersBySellerName,
   updateOrderStatus,
 } = require('../services/orders.services');
+const { getOrdersBySellerName } = require('../services/seller.services');
 
 const create = async (req, res) => {
   try {
