@@ -19,35 +19,28 @@ function LoginComponent() {
   const handleLogin = async () => {
     try {
       const result = await requestLogin('/login', { email, password });
-      const { token, role } = result;
+      const { token } = result;
 
       setToken(token);
 
       setLocalUser(result);
 
       setIsLogged(true);
-
-      if (isLogged && role === 'customer') {
-        return <Navigate to="/customer/products" />;
-      }
-
-      if (isLogged && role === 'seller') {
-        return <Navigate to="/seller/orders" />;
-      }
     } catch (error) {
       setFailedTryLogin(true);
       setIsLogged(false);
     }
   };
 
-<<<<<<< HEAD
-=======
   if (isLogged) {
     const { role } = localUser();
     let url = '';
     switch (role) {
     case 'administrator':
       url = '/admin/manage';
+      break;
+    case 'seller':
+      url = '/seller/orders';
       break;
     default:
       url = '/customer/products';
@@ -56,7 +49,6 @@ function LoginComponent() {
     return <Navigate to={ url } />;
   }
 
->>>>>>> 31286371ea66485314edbd18d4b0a1a043ff42ad
   return (
     <div className="login">
       <h2>logo</h2>
