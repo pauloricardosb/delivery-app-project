@@ -70,16 +70,16 @@ const getOrdersBySellerName = async (sellerName) => {
   const sellerId = await findUserId(sellerName);
   const orders = await Sale.findAll({ where: { sellerId } });
 
-  const orderResult = orders.map(({ id, saleDate, totalPrice, status }) => ({
+  const sellerOrderResult = orders.map(({ id, saleDate, totalPrice, status }) => ({
     id,
     saleDate: saleDate.toLocaleDateString('pt-BR'),
     status,
     totalPrice,
   }));
 
-  if (orderResult.length === 0) throw new Error('Orders not found');
+  if (sellerOrderResult.length === 0) throw new Error('Orders not found');
 
-  return orderResult;
+  return sellerOrderResult;
 };
 
 const getOrdersByOrdersId = async (orderId) => {
