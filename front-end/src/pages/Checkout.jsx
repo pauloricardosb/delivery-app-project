@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import { localCart, localUser, removeItem } from '../helpers/localStorage';
-import { requestAPI, setToken } from '../helpers/APIRequests';
+import { requestAPI, requestRegister, setToken } from '../helpers/APIRequests';
 import CheckoutCard from '../components/CheckoutCard';
 
 function Checkout() {
   const [cart, setCart] = useState([]);
   const [entrega, setEntrega] = useState({
-    vendedor: 'Vendedor',
+    vendedor: 0,
     endereco: '',
     numero: '',
   });
   const [vendedores, setVendedores] = useState([]);
+  const [checkId, setCheckId] = useState(0);
 
   const fetch = async () => {
     const { token } = localUser();
@@ -56,6 +58,25 @@ function Checkout() {
     return formatted.replace('.', ',');
   };
 
+  const handleCheckout = async () => {
+    const { name, token } = localUser();
+
+    setToken(token);
+
+    const { id } = await requestRegister('/costumer/orders', {
+      userName: name,
+      sellerId: entrega.vendedor,
+      deliveryAddress: entrega.endereco,
+      deliveryNumber: entrega.numero,
+      totalPrice: cart.reduce((total, item) => total + (item.price * item.quantity), 0),
+      products: cart,
+    });
+
+    setCheckId(id);
+  };
+
+  if (checkId !== 0) return <Navigate to={ `/customer/orders/${checkId}` } />;
+
   return (
     <div>
       <table>
@@ -91,11 +112,10 @@ function Checkout() {
               }))
             }
           >
-            <option value="Vendedor" default>Vendedor</option>
             { vendedores.map((vendedor, index) => (
               <option
                 key={ index }
-                value={ vendedor.name }
+                value={ vendedor.id }
               >
                 { vendedor.name }
               </option>
@@ -135,7 +155,7 @@ function Checkout() {
         <button
           type="button"
           data-testid="customer_checkout__button-submit-order"
-          onClick={ () => {} }
+          onClick={ handleCheckout }
         >
           FINALIZAR PEDIDO
         </button>
