@@ -3,6 +3,7 @@ import { requestAPI, setToken } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
 import Navbar from '../components/NavbarComponent';
 import ProductCard from '../components/ProductCard';
+import CartShop from '../components/CartShop';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -40,6 +41,9 @@ function Products() {
       <Navbar />
       <div>
         { products.length > 0 ? productCards() : null }
+      </div>
+      <div>
+        <CartShop />
       </div>
     </div>
   );

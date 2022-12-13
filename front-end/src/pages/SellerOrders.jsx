@@ -1,6 +1,8 @@
+import React, { useState, useEffect } from 'react';
 import NavbarComponent from '../components/NavbarComponent';
 import OrderCard from '../components/OrderCard';
-import { requestSellerOrders } from '../helpers/APIRequests';
+import { requestAPI, setToken } from '../helpers/APIRequests';
+import { localUser } from '../helpers/localStorage';
 
 function SellerOrders() {
   const [orders, setOrders] = useState([]);
@@ -11,7 +13,7 @@ function SellerOrders() {
 
       setToken(token);
 
-      const requestOrders = await requestSellerOrders('/seller/orders/', { name });
+      const requestOrders = await requestAPI(`/seller/orders/${name}`);
 
       setOrders(requestOrders);
     } catch (error) {

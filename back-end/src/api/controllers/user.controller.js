@@ -1,4 +1,4 @@
-const { getUser, registerUser } = require('../services/user.services');
+const { getUser, registerUser, getAll, deleteOne } = require('../services/user.services');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -19,4 +19,23 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = { login, register }; 
+const getUsers = async (_req, res) => {
+  try {
+    const users = await getAll();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await deleteOne(id);
+    res.status(202).send();
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+module.exports = { login, register, getUsers, deleteUser }; 

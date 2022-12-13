@@ -26,7 +26,7 @@ const getByUserName = async (req, res) => {
 
 const getBySellerName = async (req, res) => {
   try {
-    const order = await getOrdersBySellerName(req.body.name);
+    const order = await getOrdersBySellerName(req.params.name);
     return res.status(200).json(order);
   } catch (error) {
     return res.status(404).json({ message: error.message });
