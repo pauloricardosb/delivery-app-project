@@ -36,7 +36,7 @@ const createOrder = async (sale) => {
   const newSale = await Sale.create({
     userId: await findUserId(userName),
     sellerId,
-    totalPrice,
+    totalPrice: +totalPrice,
     deliveryAddress,
     deliveryNumber,
     saleDate: new Date(),

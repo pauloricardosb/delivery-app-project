@@ -1,5 +1,4 @@
 const md5 = require('md5');
-const { Op } = require('sequelize');
 const { User } = require('../../database/models');
 const { generateJWT } = require('../helpers/jwt');
 
@@ -48,9 +47,9 @@ const registerUser = async ({ name, role = 'customer', email, password }) => {
   };
 };
 
-const getAll = async () => {
+const getAll = async (filters) => {
   const users = await User.findAll({
-    where: { role: { [Op.not]: ['administrator'] } },
+    where: { role: filters },
     attributes: ['id', 'name', 'email', 'role'],
   });
 

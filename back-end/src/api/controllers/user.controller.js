@@ -21,8 +21,17 @@ const register = async (req, res) => {
 
 const getUsers = async (_req, res) => {
   try {
-    const users = await getAll();
+    const users = await getAll(['customer', 'seller']);
     res.status(200).json(users);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+const getSellers = async (_req, res) => {
+  try {
+    const sellers = await getAll(['seller']);
+    res.status(200).json(sellers);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -38,4 +47,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { login, register, getUsers, deleteUser }; 
+module.exports = { login, register, getUsers, getSellers, deleteUser }; 

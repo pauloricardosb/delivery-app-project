@@ -7,6 +7,7 @@ const {
 const { getOrdersBySellerName } = require('../services/seller.services');
 
 const create = async (req, res) => {
+  console.log(req.body);
   try {
     const sale = await createOrder(req.body);
     return res.status(201).json({ id: sale });

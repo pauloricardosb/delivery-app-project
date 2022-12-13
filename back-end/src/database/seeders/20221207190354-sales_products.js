@@ -15,16 +15,6 @@ module.exports = {
           product_id: 2,
           quantity: 2,
         },
-        {
-          sale_id: 2,
-          product_id: 2,
-          quantity: 1,
-        },
-        {
-          sale_id: 2,
-          product_id: 3,
-          quantity: 1,
-        },
       ],
       {},
     );

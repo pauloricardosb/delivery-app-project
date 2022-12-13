@@ -31,7 +31,13 @@ export const setLocalCart = (product) => {
     newCart.push(product);
   }
 
-  console.log(newCart);
+  localStorage.setItem('carrinho', JSON.stringify(newCart));
+};
+
+export const removeItem = (name) => {
+  const cart = localCart();
+
+  const newCart = cart.filter((item) => item.name !== name);
 
   localStorage.setItem('carrinho', JSON.stringify(newCart));
 };
