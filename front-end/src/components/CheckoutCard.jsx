@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { removeItem } from '../helpers/localStorage';
 
-function CheckoutCard({ item: { name, price, quantity }, index }) {
-  const handleCart = () => {
-    removeItem(name);
+function CheckoutCard({ item: { name, price, quantity }, index, handleCart }) {
+  const subTotal = () => {
+    const total = price * quantity;
+    return parseFloat(total).toFixed(2).replace('.', ',');
   };
 
   return (
@@ -27,12 +27,12 @@ function CheckoutCard({ item: { name, price, quantity }, index }) {
       <td
         data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
       >
-        { price }
+        { parseFloat(price).toFixed(2).replace('.', ',') }
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
       >
-        { price * quantity }
+        { subTotal() }
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
@@ -40,7 +40,7 @@ function CheckoutCard({ item: { name, price, quantity }, index }) {
         <button
           type="button"
           data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-          onClick={ handleCart }
+          onClick={ () => handleCart(name) }
         >
           Remover
         </button>
@@ -53,9 +53,10 @@ CheckoutCard.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
-    quantity: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,
+  handleCart: PropTypes.func.isRequired,
 };
 
 export default CheckoutCard;

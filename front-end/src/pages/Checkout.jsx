@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { localCart, localUser } from '../helpers/localStorage';
+import { localCart, localUser, removeItem } from '../helpers/localStorage';
 import { requestAPI, setToken } from '../helpers/APIRequests';
 import CheckoutCard from '../components/CheckoutCard';
 
@@ -30,12 +30,21 @@ function Checkout() {
     fetch();
   }, []);
 
+  const handleCart = (name) => {
+    removeItem(name);
+
+    const local = localCart() || [];
+
+    setCart(local);
+  };
+
   const itemCard = () => {
     const card = cart.map((item, index) => (
       <CheckoutCard
         key={ index }
         item={ item }
         index={ index }
+        handleCart={ handleCart }
       />
     ));
     return card;
