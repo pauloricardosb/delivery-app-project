@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { requestAPI, setToken } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
 import ProductOrderCard from '../components/ProductOrderCard';
+import Navbar from '../components/NavbarComponent';
 
 const orderDetails = 'customer_order_details__element-order-details';
 
@@ -45,6 +46,7 @@ function OrderDetails() {
 
   return (
     <div>
+      <Navbar />
       <h3>Detalhe do Pedido</h3>
       <div>
         <div>

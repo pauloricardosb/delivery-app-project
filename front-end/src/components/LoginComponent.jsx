@@ -12,6 +12,14 @@ function LoginComponent() {
   const [failedTryLogin, setFailedTryLogin] = useState(false);
 
   useEffect(() => {
+    const local = localUser();
+
+    if (local) {
+      setIsLogged(true);
+    }
+  }, []);
+
+  useEffect(() => {
     const login = validateLogin(email, password);
     setBtnLogin(!login);
   }, [email, password]);
