@@ -18,6 +18,11 @@ export const requestRegister = async (endpoint, body) => {
   return data;
 };
 
+export const requestSellerOrders = async (endpoint, body) => {
+  const { data } = await api.get(endpoint, body);
+  return data;
+};
+
 export const requestAPI = async (endpoint) => {
   const { data } = await api.get(endpoint);
   return data;

@@ -5,6 +5,7 @@ const registerRouter = require('./routes/register.routes');
 const productsRouter = require('./routes/products.routes');
 const ordersRouter = require('./routes/orders.routes');
 const imagesRouter = require('./routes/images.routes');
+const sellerRouter = require('./routes/sellers.routes');
 const usersRouter = require('./routes/users.routes');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/costumer/products', productsRouter);
 app.use('/costumer/orders', ordersRouter);
+app.use('/seller', sellerRouter);
 app.use('/images', imagesRouter);
 app.use('/users', usersRouter);
 

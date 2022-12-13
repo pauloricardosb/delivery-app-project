@@ -39,6 +39,9 @@ function LoginComponent() {
     case 'administrator':
       url = '/admin/manage';
       break;
+    case 'seller':
+      url = '/seller/orders';
+      break;
     default:
       url = '/customer/products';
       break;

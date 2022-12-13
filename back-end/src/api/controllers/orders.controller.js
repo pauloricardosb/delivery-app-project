@@ -2,8 +2,9 @@ const {
   createOrder,
   getOrdersByUserName, 
   getOrdersByOrdersId,
-  updateOrderStatus, 
+  updateOrderStatus,
 } = require('../services/orders.services');
+const { getOrdersBySellerName } = require('../services/seller.services');
 
 const create = async (req, res) => {
   try {
@@ -17,6 +18,15 @@ const create = async (req, res) => {
 const getByUserName = async (req, res) => {
   try {
     const order = await getOrdersByUserName(req.params.name);
+    return res.status(200).json(order);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
+const getBySellerName = async (req, res) => {
+  try {
+    const order = await getOrdersBySellerName(req.body.name);
     return res.status(200).json(order);
   } catch (error) {
     return res.status(404).json({ message: error.message });
@@ -41,4 +51,4 @@ const updateStatus = async (req, res) => {
   }
 };
 
-module.exports = { create, getByUserName, getByOrderId, updateStatus };
+module.exports = { create, getByUserName, getByOrderId, updateStatus, getBySellerName };
