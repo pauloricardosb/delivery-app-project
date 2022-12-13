@@ -14,23 +14,28 @@ function Checkout() {
   const [vendedores, setVendedores] = useState([]);
   const [checkId, setCheckId] = useState(0);
 
-  const fetch = async () => {
-    const { token } = localUser();
-
-    setToken(token);
-
-    const sellers = await requestAPI('/users/sellers');
-
-    setVendedores(sellers);
-  };
-
   useEffect(() => {
+    const fetch = async () => {
+      const { token } = localUser();
+
+      setToken(token);
+
+      const sellers = await requestAPI('/users/sellers');
+
+      setVendedores(sellers);
+
+      setEntrega((current) => ({
+        ...current,
+        vendedor: sellers[0].id,
+      }));
+    };
+
     const local = localCart() || [];
 
     setCart(local);
 
     fetch();
-  }, []);
+  }, [vendedores]);
 
   const handleCart = (name) => {
     removeItem(name);
