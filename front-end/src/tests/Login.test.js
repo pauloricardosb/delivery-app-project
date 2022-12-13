@@ -109,6 +109,30 @@ describe('Testes da rota "LOGIN"', function () {
     unmount();
   })
 
+  it('Verifica se é possível efetuar um Login como "Seller"', async function () {
+    jest.spyOn(api, 'post').mockImplementation(() => Promise.resolve({
+      data: { ...users[1] }
+    }))
+
+    const { unmount, history } = renderWithRouter(<Login />);
+
+    const emailInput = screen.getByTestId('common_login__input-email');
+
+    userEvent.type(emailInput, 'fulana@deliveryapp.com');
+
+    const passwordInput = screen.getByTestId('common_login__input-password');
+
+    userEvent.type(passwordInput, 'fulana@123');
+
+    const btnLogin = screen.getByTestId('common_login__button-login')
+
+    await waitFor(() => userEvent.click(btnLogin));
+
+    expect(history.location.pathname).toBe('/seller/orders');
+
+    unmount();
+  })
+
   it('Verifica se é possível efetuar um Login como "Administrator"', async function () {
     jest.spyOn(api, 'post').mockImplementation(() => Promise.resolve({
       data: { ...users[2] }
