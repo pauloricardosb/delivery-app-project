@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { localUser } from '../helpers/localStorage';
 
-function UserFullName({ userType }) {
+function UserFullName() {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
@@ -12,15 +11,11 @@ function UserFullName({ userType }) {
 
   return (
     <p
-      data-testid={ `${userType}__element-navbar-user-full-name` }
+      data-testid="customer_products__element-navbar-user-full-name"
     >
       { userName }
     </p>
   );
 }
-
-UserFullName.propTypes = {
-  userType: PropTypes.string.isRequired,
-};
 
 export default UserFullName;

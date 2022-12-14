@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { requestAPI, setToken } from '../helpers/APIRequests';
+import { requestAPI, setToken, requestStatus } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
 import ProductOrderCard from '../components/ProductOrderCard';
 import Navbar from '../components/NavbarComponent';
@@ -53,6 +53,32 @@ function OrderDetails() {
     } return !(order.status === 'Em Trânsito' && status === 'delivery');
   };
 
+  const handleStatus = async () => {
+    const { token } = localUser();
+
+    let newStatus = '';
+
+    switch (order.status) {
+    case 'Pendente':
+      newStatus = 'Preparando';
+      break;
+    case 'Preparando':
+      newStatus = 'Em Trânsito';
+      break;
+    default:
+      newStatus = 'Entregue';
+      break;
+    }
+
+    setToken(token);
+
+    await requestStatus(`/costumer/orders/${id}`, { status: newStatus });
+
+    const requestOrder = await requestAPI(`/costumer/orders/details/${id}`);
+
+    setOrder(requestOrder);
+  };
+
   const statusButton = () => {
     if (role === 'seller') {
       return (
@@ -61,11 +87,13 @@ function OrderDetails() {
             status="preparing"
             user="seller"
             isDisabled={ isDisabled('preparing') }
+            handleStatus={ handleStatus }
           />
           <StatusButton
             status="dispatch"
             user="seller"
             isDisabled={ isDisabled('dispatch') }
+            handleStatus={ handleStatus }
           />
         </div>
       );
@@ -75,6 +103,7 @@ function OrderDetails() {
         status="delivery"
         user="customer"
         isDisabled={ isDisabled('delivery') }
+        handleStatus={ handleStatus }
       />
     );
   };
