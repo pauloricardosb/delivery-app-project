@@ -43,7 +43,7 @@ const deleteUser = async (req, res) => {
     await deleteOne(id);
     res.status(202).send();
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ message: 'User cannot be deleted' });
   }
 };
 
