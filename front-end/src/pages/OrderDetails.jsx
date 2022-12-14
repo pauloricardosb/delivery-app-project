@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { requestAPI, setToken } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
 import ProductOrderCard from '../components/ProductOrderCard';
+import Navbar from '../components/NavbarComponent';
 
 const orderDetails = 'customer_order_details__element-order-details';
 
@@ -45,6 +46,7 @@ function OrderDetails() {
 
   return (
     <div>
+      <Navbar />
       <h3>Detalhe do Pedido</h3>
       <div>
         <div>
@@ -59,6 +61,11 @@ function OrderDetails() {
             { `P. Vend: ${order.sellerName}` }
           </p>
           <p
+            data-testid={ `${orderDetails}-label-order-date` }
+          >
+            { order.saleDate }
+          </p>
+          <p
             data-testid={ `${orderDetails}-label-delivery-status` }
           >
             { order.status }
@@ -66,6 +73,7 @@ function OrderDetails() {
           <button
             type="button"
             data-testid="customer_order_details__button-delivery-check"
+            disabled
           >
             MARCAR COMO ENTREGUE
           </button>
@@ -77,7 +85,7 @@ function OrderDetails() {
           <p
             data-testid="customer_order_details__element-order-total-price"
           >
-            { order.totalPrice }
+            { order.totalPrice.replace('.', ',') }
           </p>
         </div>
       </div>
