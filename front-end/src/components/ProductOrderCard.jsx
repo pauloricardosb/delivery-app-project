@@ -24,12 +24,12 @@ function ProductOrderCard({ product: { name, quantity, price }, index }) {
       <p
         data-testid={ `${details}-table-unit-price-${index}` }
       >
-        { price }
+        { price.replace('.', ',') }
       </p>
       <p
         data-testid={ `${details}-table-sub-total-${index}` }
       >
-        { price * quantity }
+        { (price * quantity).toFixed(2).replace('.', ',') }
       </p>
     </div>
   );
