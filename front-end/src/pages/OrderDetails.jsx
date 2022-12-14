@@ -4,13 +4,16 @@ import { requestAPI, setToken } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
 import ProductOrderCard from '../components/ProductOrderCard';
 import Navbar from '../components/NavbarComponent';
-
-const orderDetails = 'customer_order_details__element-order-details';
+import StatusButton from '../components/StatusButton';
 
 function OrderDetails() {
   const [order, setOrder] = useState(null);
 
   const { id } = useParams();
+
+  const { role } = localUser();
+
+  const orderDetails = `${role}_order_details__element-order-details`;
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -44,6 +47,18 @@ function OrderDetails() {
 
   if (!order) return <div>Loading...</div>;
 
+  const statusButton = () => {
+    if (role === 'seller') {
+      return (
+        <div>
+          <StatusButton status="preparing" user="seller" />
+          <StatusButton status="dispatch" user="seller" />
+        </div>
+      );
+    }
+    return <StatusButton status="delivery" user="customer" />;
+  };
+
   return (
     <div>
       <Navbar />
@@ -70,20 +85,16 @@ function OrderDetails() {
           >
             { order.status }
           </p>
-          <button
-            type="button"
-            data-testid="customer_order_details__button-delivery-check"
-            disabled
-          >
-            MARCAR COMO ENTREGUE
-          </button>
+          {
+            statusButton()
+          }
         </div>
         <div>
           { orderProducts() }
         </div>
         <div>
           <p
-            data-testid="customer_order_details__element-order-total-price"
+            data-testid={ `${role}_order_details__element-order-total-price` }
           >
             { order.totalPrice.replace('.', ',') }
           </p>
