@@ -14,7 +14,7 @@ function LoginComponent() {
   // Source: https://trybecourse.slack.com/archives/C02NJF661EF/p1647051142193709
   const routes = useMemo(() => ({
     customer: '/customer/products',
-    seller: 'seller/orders',
+    seller: '/seller/orders',
     administrator: '/admin/manage',
   }), []);
 
