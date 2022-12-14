@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment/moment';
 import { Link } from 'react-router-dom';
 
 function OrderCard({ order: { id, status, saleDate, totalPrice }, userType }) {
+  const ordersURL = () => {
+    if (userType === 'customer_orders') {
+      return 'customer';
+    }
+    return 'seller';
+  };
+
   return (
-    <Link to={ `/seller/orders/${id}` }>
+    <Link to={ `/${ordersURL()}/orders/${id}` }>
       <div>
         <p
-          data-testid={ `${userType}__element-order-id-${id}` }
+          data-testid={ `${userType}__element-order-id--${id}` }
         >
           { id }
         </p>
@@ -24,7 +30,7 @@ function OrderCard({ order: { id, status, saleDate, totalPrice }, userType }) {
         <p
           data-testid={ `${userType}__element-order-date-${id}` }
         >
-          { moment(saleDate).locale('pt-br').format('L') }
+          { saleDate }
         </p>
         <p
           data-testid={ `${userType}__element-card-price-${id}` }

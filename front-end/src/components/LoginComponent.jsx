@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { validateLogin } from '../validates/validateLogin';
 import { requestLogin, setToken } from '../helpers/APIRequests';
@@ -11,13 +11,12 @@ function LoginComponent() {
   const [isLogged, setIsLogged] = useState(false);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
 
-  useEffect(() => {
-    const local = localUser();
-
-    if (local) {
-      setIsLogged(true);
-    }
-  }, []);
+  // Source: https://trybecourse.slack.com/archives/C02NJF661EF/p1647051142193709
+  const routes = useMemo(() => ({
+    customer: '/customer/products',
+    seller: 'seller/orders',
+    administrator: '/admin/manage',
+  }), []);
 
   useEffect(() => {
     const login = validateLogin(email, password);
@@ -42,19 +41,8 @@ function LoginComponent() {
 
   if (isLogged) {
     const { role } = localUser();
-    let url = '';
-    switch (role) {
-    case 'administrator':
-      url = '/admin/manage';
-      break;
-    case 'seller':
-      url = '/seller/orders';
-      break;
-    default:
-      url = '/customer/products';
-      break;
-    }
-    return <Navigate to={ url } />;
+
+    return <Navigate to={ routes[role] } replace />;
   }
 
   return (
