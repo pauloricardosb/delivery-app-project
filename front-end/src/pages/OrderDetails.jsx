@@ -45,19 +45,41 @@ function OrderDetails() {
     return cards;
   };
 
-  if (!order) return <div>Loading...</div>;
+  const isDisabled = (status) => {
+    if (order.status === 'Pendente' && status === 'preparing') {
+      return false;
+    } if (order.status === 'Preparando' && status === 'dispatch') {
+      return false;
+    } return !(order.status === 'Em Trânsito' && status === 'delivery');
+  };
 
   const statusButton = () => {
     if (role === 'seller') {
       return (
         <div>
-          <StatusButton status="preparing" user="seller" />
-          <StatusButton status="dispatch" user="seller" />
+          <StatusButton
+            status="preparing"
+            user="seller"
+            isDisabled={ isDisabled('preparing') }
+          />
+          <StatusButton
+            status="dispatch"
+            user="seller"
+            isDisabled={ isDisabled('dispatch') }
+          />
         </div>
       );
     }
-    return <StatusButton status="delivery" user="customer" />;
+    return (
+      <StatusButton
+        status="delivery"
+        user="customer"
+        isDisabled={ isDisabled('delivery') }
+      />
+    );
   };
+
+  if (!order) return <div>Loading...</div>;
 
   return (
     <div>

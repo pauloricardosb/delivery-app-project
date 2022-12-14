@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function StatusButton({ status, user }) {
+function StatusButton({ status, user, isDisabled }) {
   const message = {
     delivery: 'MARCAR COMO ENTREGUE',
     preparing: 'PREPARAR PEDIDO',
@@ -12,7 +12,7 @@ function StatusButton({ status, user }) {
     <button
       type="button"
       data-testid={ `${user}_order_details__button-${status}-check` }
-      disabled
+      disabled={ isDisabled }
     >
       { message[status] }
     </button>
@@ -22,6 +22,7 @@ function StatusButton({ status, user }) {
 StatusButton.propTypes = {
   status: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
 };
 
 export default StatusButton;
