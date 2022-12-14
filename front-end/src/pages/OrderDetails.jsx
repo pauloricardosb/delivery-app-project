@@ -6,6 +6,8 @@ import ProductOrderCard from '../components/ProductOrderCard';
 import Navbar from '../components/NavbarComponent';
 import StatusButton from '../components/StatusButton';
 
+const orderStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
+
 function OrderDetails() {
   const [order, setOrder] = useState(null);
 
@@ -46,11 +48,11 @@ function OrderDetails() {
   };
 
   const isDisabled = (status) => {
-    if (order.status === 'Pendente' && status === 'preparing') {
+    if (order.status === orderStatus[0] && status === 'preparing') {
       return false;
-    } if (order.status === 'Preparando' && status === 'dispatch') {
+    } if (order.status === orderStatus[1] && status === 'dispatch') {
       return false;
-    } return !(order.status === 'Em Trânsito' && status === 'delivery');
+    } return !(order.status === orderStatus[2] && status === 'delivery');
   };
 
   const handleStatus = async () => {
@@ -59,14 +61,16 @@ function OrderDetails() {
     let newStatus = '';
 
     switch (order.status) {
-    case 'Pendente':
+    case orderStatus[0]:
       newStatus = 'Preparando';
       break;
-    case 'Preparando':
+    case orderStatus[1]:
       newStatus = 'Em Trânsito';
       break;
-    default:
+    case orderStatus[2]:
       newStatus = 'Entregue';
+      break;
+    default:
       break;
     }
 
