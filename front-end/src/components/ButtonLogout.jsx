@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 import { localLogout } from '../helpers/localStorage';
 
-function ButtonLogout({ userType }) {
+function ButtonLogout() {
   const [isLogout, setIsLogout] = useState(false);
 
   const logout = () => {
@@ -16,16 +15,12 @@ function ButtonLogout({ userType }) {
   return (
     <button
       type="button"
-      data-testid={ `${userType}__element-navbar-link-logout` }
+      data-testid="customer_products__element-navbar-link-logout"
       onClick={ logout }
     >
       Sair
     </button>
   );
 }
-
-ButtonLogout.propTypes = {
-  userType: PropTypes.string.isRequired,
-};
 
 export default ButtonLogout;

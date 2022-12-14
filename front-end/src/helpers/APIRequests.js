@@ -32,4 +32,8 @@ export const requestDelete = async (endpoint) => {
   await api.delete(endpoint);
 };
 
+export const requestStatus = async (endpoint, body) => {
+  await api.patch(endpoint, body);
+};
+
 export default api;
