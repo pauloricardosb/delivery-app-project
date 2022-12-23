@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { BsFillCartFill } from 'react-icons/bs';
 import { localCart } from '../helpers/localStorage';
+import '../css/cartPrice.css';
 
 function CartShop() {
   const [cart, setCart] = useState([]);
@@ -18,7 +20,7 @@ function CartShop() {
   };
 
   return (
-    <div>
+    <div className="cart-price">
       <Link
         to="/customer/checkout"
       >
@@ -30,8 +32,10 @@ function CartShop() {
           <p
             data-testid="customer_products__checkout-bottom-value"
           >
+            R$
             { (cart.length > 0) ? subTotal() : '0,00' }
           </p>
+          <BsFillCartFill />
         </button>
       </Link>
     </div>

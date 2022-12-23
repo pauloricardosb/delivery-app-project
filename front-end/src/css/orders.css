@@ -1,0 +1,11 @@
+.orders {
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 80px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin-left: 75px;
+  text-decoration: none;
+  width: 60%;
+}

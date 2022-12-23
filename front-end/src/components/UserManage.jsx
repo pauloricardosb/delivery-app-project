@@ -3,6 +3,7 @@ import { requestAPI, setToken } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
 import RegisterForm from './RegisterForm';
 import UserRow from './UserRow';
+import '../css/tableUsers.css';
 
 function UserManage() {
   const [users, setUsers] = useState([]);
@@ -41,11 +42,9 @@ function UserManage() {
   return (
     <div>
       <RegisterForm fetch={ fetchUsers } />
-      <table>
+      <h3 className="title">Lista de Usuários</h3>
+      <table className="table-users">
         <thead>
-          <tr>
-            <th>Lista de Usuários</th>
-          </tr>
           <tr>
             <td>Item</td>
             <td>Nome</td>

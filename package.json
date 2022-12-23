@@ -55,6 +55,7 @@
     }
   },
   "dependencies": {
+    "react-icons": "^4.7.1",
     "react-router-dom": "^5.3.4"
   }
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import validator from 'validator';
 import { requestRegister, setToken } from '../helpers/APIRequests';
 import { localUser } from '../helpers/localStorage';
+import '../css/registerForm.css';
 
 function RegisterForm({ fetch }) {
   const [failedTryRegister, setFailedTryRegister] = useState(false);
@@ -46,9 +47,9 @@ function RegisterForm({ fetch }) {
   };
 
   return (
-    <div>
+    <div className="register-form-admin">
       <label htmlFor="admin_manage__input-name">
-        Nome
+        Nome:
         <input
           type="text"
           id="admin_manage__input-name"
@@ -63,7 +64,7 @@ function RegisterForm({ fetch }) {
         />
       </label>
       <label htmlFor="admin_manage__input-email">
-        Email
+        Email:
         <input
           type="text"
           id="admin_manage__input-email"
@@ -78,7 +79,7 @@ function RegisterForm({ fetch }) {
         />
       </label>
       <label htmlFor="admin_manage__input-password">
-        password
+        Password:
         <input
           type="password"
           id="admin_manage__input-password"

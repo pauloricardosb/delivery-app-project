@@ -3,6 +3,7 @@ import { Navigate, Link } from 'react-router-dom';
 import { validateLogin } from '../validates/validateLogin';
 import { requestLogin, setToken } from '../helpers/APIRequests';
 import { localUser, setLocalUser } from '../helpers/localStorage';
+import '../css/login.css';
 
 function LoginComponent() {
   const [email, setEmail] = useState('');
@@ -47,7 +48,12 @@ function LoginComponent() {
 
   return (
     <div className="login">
-      <h2>logo</h2>
+      <img
+        src={ require('../images/delivery.jpg') }
+        alt="delivery"
+        className="delivery-image"
+      />
+      <h2>Delivery App</h2>
       <div className="login-form">
         <input
           type="text"
@@ -65,13 +71,18 @@ function LoginComponent() {
         />
         <button
           type="button"
+          className="btn-login"
           data-testid="common_login__button-login"
           disabled={ btnLogin }
           onClick={ handleLogin }
         >
           LOGIN
         </button>
-        <button type="button" data-testid="common_login__button-register">
+        <button
+          type="button"
+          data-testid="common_login__button-register"
+          className="btn-register"
+        >
           <Link to="/register">
             Ainda não tenho conta.
           </Link>
@@ -79,7 +90,7 @@ function LoginComponent() {
 
         { failedTryLogin ? (
           <p data-testid="common_login__element-invalid-email">
-            usuario não cadastrado
+            Usuário não cadastrado.
           </p>
         )
           : null }

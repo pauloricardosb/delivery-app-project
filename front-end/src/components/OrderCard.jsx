@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../css/orders.css';
 
 function OrderCard({ order: { id, status, saleDate, totalPrice }, userType }) {
   const ordersURL = () => {
@@ -12,31 +13,34 @@ function OrderCard({ order: { id, status, saleDate, totalPrice }, userType }) {
 
   return (
     <Link to={ `/${ordersURL()}/orders/${id}` }>
-      <div>
-        <p
-          data-testid={ `${userType}__element-order-id--${id}` }
-        >
-          { id }
-        </p>
-      </div>
-      <div>
-        <p
-          data-testid={ `${userType}__element-delivery-status-${id}` }
-        >
-          { status }
-        </p>
-      </div>
-      <div>
-        <p
-          data-testid={ `${userType}__element-order-date-${id}` }
-        >
-          { saleDate }
-        </p>
-        <p
-          data-testid={ `${userType}__element-card-price-${id}` }
-        >
-          { totalPrice.replace('.', ',') }
-        </p>
+      <div className="orders">
+        <div>
+          <p
+            data-testid={ `${userType}__element-order-id--${id}` }
+          >
+            { id }
+          </p>
+        </div>
+        <div>
+          <p
+            data-testid={ `${userType}__element-delivery-status-${id}` }
+          >
+            { status }
+          </p>
+        </div>
+        <div>
+          <p
+            data-testid={ `${userType}__element-order-date-${id}` }
+          >
+            { saleDate }
+          </p>
+          <p
+            data-testid={ `${userType}__element-card-price-${id}` }
+          >
+            R$
+            { totalPrice.replace('.', ',') }
+          </p>
+        </div>
       </div>
     </Link>
   );

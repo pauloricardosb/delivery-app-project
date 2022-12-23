@@ -1,0 +1,57 @@
+.delivery-image {
+  height: 180px;
+  width: 270px;
+}
+
+.login {
+  align-items: center;
+  background-color: #f8f7f7;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-top: 55px;
+  padding: 30px;
+  width: 78%;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Edu+VIC+WA+NT+Beginner:wght@500&family=Square+Peg&display=swap') ;
+
+.login h1 {
+  font-family: Caveat , cursive;
+  font-size: 68px;
+  margin-bottom: 6px;
+  margin-top: -20px;
+}
+
+.login input {
+  border-radius: 6px;
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: 25px;
+  margin-top: 10px;
+  padding: 9px;
+}
+
+.btn-login {
+  background-color: #f25252;
+  border: none;
+  border-radius: 10px;
+  color: #f8f7f7;
+  display: flex;
+  font-weight: 800;
+  margin-bottom: 20px;
+  margin-left: 55px;
+  padding: 10px 50px;
+}
+
+.btn-register {
+  background-color: #080c17;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  font-weight: 800;
+  margin-bottom: 20px;
+  padding: 10px 50px;
+}
+

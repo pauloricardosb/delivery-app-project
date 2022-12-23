@@ -5,6 +5,7 @@ import { localUser } from '../helpers/localStorage';
 import ProductOrderCard from '../components/ProductOrderCard';
 import Navbar from '../components/NavbarComponent';
 import StatusButton from '../components/StatusButton';
+import '../css/orderDetails.css';
 
 const orderStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
 
@@ -117,9 +118,9 @@ function OrderDetails() {
   return (
     <div>
       <Navbar />
-      <h3>Detalhe do Pedido</h3>
+      <h3 className="title">Detalhes do Pedido</h3>
       <div>
-        <div>
+        <div className="detalhes-pedido">
           <p
             data-testid={ `${orderDetails}-label-order-id` }
           >
@@ -140,17 +141,21 @@ function OrderDetails() {
           >
             { order.status }
           </p>
-          {
-            statusButton()
-          }
+          <div className="status-btn">
+            {
+              statusButton()
+            }
+          </div>
         </div>
-        <div>
+        <div className="detalhes-pedido2">
           { orderProducts() }
         </div>
-        <div>
+        <div className="price-cart">
+          <p>Preço Total:</p>
           <p
             data-testid={ `${role}_order_details__element-order-total-price` }
           >
+            R$
             { order.totalPrice.replace('.', ',') }
           </p>
         </div>

@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { localCart, localUser, removeItem } from '../helpers/localStorage';
 import { requestAPI, requestRegister, setToken } from '../helpers/APIRequests';
 import CheckoutCard from '../components/CheckoutCard';
+import '../css/tableCartName.css';
 
 function Checkout() {
   const [cart, setCart] = useState([]);
@@ -85,7 +86,7 @@ function Checkout() {
   return (
     <div>
       <table>
-        <thead>
+        <thead className="table-cart-name">
           <tr>
             <td>Item</td>
             <td>Descrição</td>
@@ -99,72 +100,78 @@ function Checkout() {
           { (cart.length > 0) ? itemCard() : null }
         </tbody>
       </table>
-      <p
-        data-testid="customer_checkout__element-order-total-price"
-      >
-        { (cart.length > 0) ? subTotal() : '0,00' }
-      </p>
-      <form>
-        <label htmlFor="customer_checkout__select-seller">
-          <select
-            id="customer_checkout__select-seller"
-            data-testid="customer_checkout__select-seller"
-            value={ entrega.vendedor }
-            onChange={
-              (e) => setEntrega((current) => ({
-                ...current,
-                vendedor: e.target.value,
-              }))
-            }
-          >
-            { vendedores.map((vendedor, index) => (
-              <option
-                key={ index }
-                value={ vendedor.id }
-              >
-                { vendedor.name }
-              </option>
-            )) }
-          </select>
-        </label>
-        <label htmlFor="customer_checkout__input-address">
-          Endereço:
-          <input
-            type="text"
-            id="customer_checkout__input-address"
-            data-testid="customer_checkout__input-address"
-            value={ entrega.endereco }
-            onChange={
-              (e) => setEntrega((current) => ({
-                ...current,
-                endereco: e.target.value,
-              }))
-            }
-          />
-        </label>
-        <label htmlFor="customer_checkout__input-number">
-          Número:
-          <input
-            type="text"
-            id="customer_checkout__input-number"
-            data-testid="customer_checkout__input-address-number"
-            value={ entrega.numero }
-            onChange={
-              (e) => setEntrega((current) => ({
-                ...current,
-                numero: e.target.value,
-              }))
-            }
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="customer_checkout__button-submit-order"
-          onClick={ handleCheckout }
+      <div className="price-cart">
+        <p>Preço total:</p>
+        <p
+          data-testid="customer_checkout__element-order-total-price"
         >
-          FINALIZAR PEDIDO
-        </button>
-      </form>
+          R$
+          { (cart.length > 0) ? subTotal() : '0,00' }
+        </p>
+      </div>
+      <div>
+        <form className="form-checkout">
+          <label htmlFor="customer_checkout__select-seller">
+            <select
+              id="customer_checkout__select-seller"
+              data-testid="customer_checkout__select-seller"
+              value={ entrega.vendedor }
+              onChange={
+                (e) => setEntrega((current) => ({
+                  ...current,
+                  vendedor: e.target.value,
+                }))
+              }
+            >
+              { vendedores.map((vendedor, index) => (
+                <option
+                  key={ index }
+                  value={ vendedor.id }
+                >
+                  { vendedor.name }
+                </option>
+              )) }
+            </select>
+          </label>
+          <label htmlFor="customer_checkout__input-address">
+            Endereço:
+            <input
+              type="text"
+              id="customer_checkout__input-address"
+              data-testid="customer_checkout__input-address"
+              value={ entrega.endereco }
+              onChange={
+                (e) => setEntrega((current) => ({
+                  ...current,
+                  endereco: e.target.value,
+                }))
+              }
+            />
+          </label>
+          <label htmlFor="customer_checkout__input-number">
+            Número:
+            <input
+              type="text"
+              id="customer_checkout__input-number"
+              data-testid="customer_checkout__input-address-number"
+              value={ entrega.numero }
+              onChange={
+                (e) => setEntrega((current) => ({
+                  ...current,
+                  numero: e.target.value,
+                }))
+              }
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="customer_checkout__button-submit-order"
+            onClick={ handleCheckout }
+          >
+            FINALIZAR PEDIDO
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

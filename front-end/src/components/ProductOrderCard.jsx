@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../css/productOrder.css';
 
 const details = 'customer_order_details__element-order';
 
 function ProductOrderCard({ product: { name, quantity, price }, index }) {
   return (
-    <div>
+    <div className="product-order">
       <p
         data-testid={ `${details}-table-item-number-${index}` }
       >

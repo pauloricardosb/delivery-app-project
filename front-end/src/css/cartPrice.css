@@ -1,0 +1,18 @@
+.cart-price {
+  display: flex;
+  justify-content: center;
+}
+
+.cart-price button {
+  align-items: center;
+  background-color: rgb(13, 13, 13);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
