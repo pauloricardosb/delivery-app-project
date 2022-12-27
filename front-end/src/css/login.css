@@ -12,7 +12,7 @@
   margin-left: 10px;
   margin-top: 55px;
   padding: 30px;
-  width: 78%;
+  width: 80%;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Caveat&family=Edu+VIC+WA+NT+Beginner:wght@500&family=Square+Peg&display=swap') ;
@@ -25,12 +25,13 @@
 }
 
 .login input {
-  border-radius: 6px;
+  border: 1px solid black;
+  border-radius: 5px;
   display: flex;
   margin-bottom: 20px;
-  margin-left: 25px;
   margin-top: 10px;
   padding: 9px;
+  width: 90%;
 }
 
 .btn-login {
@@ -55,3 +56,14 @@
   padding: 10px 50px;
 }
 
+
+.btn-register a {
+  color: white;
+  text-decoration: none;
+}
+
+.user-not-found {
+  color: red;
+  font-size: 12px;
+  text-align: center;
+}

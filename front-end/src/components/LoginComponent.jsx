@@ -13,11 +13,14 @@ function LoginComponent() {
   const [failedTryLogin, setFailedTryLogin] = useState(false);
 
   // Source: https://trybecourse.slack.com/archives/C02NJF661EF/p1647051142193709
-  const routes = useMemo(() => ({
-    customer: '/customer/products',
-    seller: '/seller/orders',
-    administrator: '/admin/manage',
-  }), []);
+  const routes = useMemo(
+    () => ({
+      customer: '/customer/products',
+      seller: '/seller/orders',
+      administrator: '/admin/manage',
+    }),
+    [],
+  );
 
   useEffect(() => {
     const login = validateLogin(email, password);
@@ -49,6 +52,7 @@ function LoginComponent() {
   return (
     <div className="login">
       <img
+        // eslint-disable-next-line global-require
         src={ require('../images/delivery.jpg') }
         alt="delivery"
         className="delivery-image"
@@ -83,17 +87,17 @@ function LoginComponent() {
           data-testid="common_login__button-register"
           className="btn-register"
         >
-          <Link to="/register">
-            Ainda não tenho conta.
-          </Link>
+          <Link to="/register">Ainda não tenho conta.</Link>
         </button>
 
-        { failedTryLogin ? (
-          <p data-testid="common_login__element-invalid-email">
+        {failedTryLogin ? (
+          <p
+            data-testid="common_login__element-invalid-email"
+            className="user-not-found"
+          >
             Usuário não cadastrado.
           </p>
-        )
-          : null }
+        ) : null}
       </div>
     </div>
   );
