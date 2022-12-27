@@ -31,15 +31,12 @@ nav {
 }
 
 .button-sair button {
+  margin-left: 20rem;
   background-color: #f8f7f7;
   border: none;
   border-radius: 10px;
   color: #f25252;
-  display: flex;
   font-weight: 800;
-  margin-bottom: 20px;
-  margin-left: 275px;
-  margin-top: 15px;
   padding: 5px 25px;
 }
 

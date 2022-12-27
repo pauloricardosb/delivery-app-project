@@ -56,11 +56,13 @@ function ProductCard({ product: { id, name, price, urlImage } }) {
           value={ quantity }
           data-testid={ `customer_products__input-card-quantity-${id}` }
           onChange={ ({ target: { value } }) => handleQuantity(+value) }
+          className="quantity-input"
         />
         <button
           type="button"
           data-testid={ `customer_products__button-card-add-item-${id}` }
           onClick={ () => handleQuantity(+quantity + 1) }
+          className="quantity-input"
         >
           +
         </button>
