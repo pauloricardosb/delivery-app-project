@@ -85,7 +85,7 @@ function Checkout() {
 
   return (
     <div>
-      <table>
+      <table className="table">
         <thead className="table-cart-name">
           <tr>
             <td>Item</td>
@@ -111,7 +111,7 @@ function Checkout() {
       </div>
       <div>
         <form className="form-checkout">
-          <label htmlFor="customer_checkout__select-seller">
+          <label className="label" htmlFor="customer_checkout__select-seller">
             <select
               id="customer_checkout__select-seller"
               data-testid="customer_checkout__select-seller"

@@ -1,18 +1,15 @@
 .cart-table {
-  align-items: center;
-  border: 1px solid;
-  color: white;
+  color: black;
   display: flex;
-  gap: 20px;
   justify-content: space-evenly;
   margin-top: 20px;
-  padding: 5px;
+  background-color: aliceblue;
+  width: 100%;
 }
 
 .cart-table button {
   border: none;
   border-radius: 10px;
-  margin-left: 120px;
   padding: 5px;
 }
 
