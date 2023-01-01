@@ -119,7 +119,7 @@ function OrderDetails() {
     <div>
       <Navbar />
       <h3 className="title">Detalhes do Pedido</h3>
-      <div>
+      <div className="order-details-div">
         <div className="detalhes-pedido">
           <p
             data-testid={ `${orderDetails}-label-order-id` }

@@ -84,7 +84,7 @@ function Checkout() {
   if (checkId !== 0) return <Navigate to={ `/customer/orders/${checkId}` } />;
 
   return (
-    <div>
+    <div className="checkout-main-div">
       <table className="table">
         <thead className="table-cart-name">
           <tr>

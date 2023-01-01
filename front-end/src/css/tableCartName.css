@@ -23,6 +23,7 @@
   background-color: #00000052;
   border: none;
   border-radius: 50px;
+  width: 50%;
 }
 
 .price-cart p {
@@ -71,4 +72,10 @@
 .label {
   display: flex;
   justify-content: center;
+}
+
+.checkout-main-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
