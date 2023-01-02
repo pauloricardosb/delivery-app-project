@@ -46,10 +46,10 @@
 }
 
 .form-checkout input {
-  color: white;
   background-color: transparent;
   border-color: transparent;
   border-bottom-color: white;
+  color: white;
   margin-bottom: 1rem;
   outline: none;
   padding: 5px;
