@@ -9,16 +9,15 @@
 .card-product img {
   border-radius: 10px;
   height: 90px;
-  margin-bottom: 8px;
+  margin: 8px;
   margin-left: 30px;
   margin-right: 10px;
-  margin-top: 8px;
   width: 70px;
 }
 
 .info-product {
   align-items: center;
-  color: rgb(0, 0, 0);
+  color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,7 +36,7 @@
   border: none;
   border-radius: 50px;
   color: white;
-  font-weight: bolder;
+  font-weight: 400;
   margin: 5px;
   padding: 6px;
 }

@@ -13,10 +13,10 @@
 }
 
 .price-cart {
+  align-items: center;
   background-color: #00000052;
   border: none;
   border-radius: 50px;
-  align-items: center;
   color: white;
   display: flex;
   flex-direction: column;
@@ -47,14 +47,12 @@
 
 .form-checkout input {
   color: white;
-  padding: 5px;
   background-color: transparent;
+  border-color: transparent;
   border-bottom-color: white;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  border-top-color: transparent;
   margin-bottom: 1rem;
   outline: none;
+  padding: 5px;
   width: 100%;
 }
 
