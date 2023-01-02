@@ -1,4 +1,7 @@
 .button-logout button {
+  border: none;
+  border-radius: 5px;
   display: flex;
   margin: 20px;
+  padding: 10px;
 }

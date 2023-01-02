@@ -16,8 +16,8 @@
   border: 1px solid white;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
   text-align: center;
+  width: 80%;
 }
 
 .table-users button {
