@@ -5,6 +5,8 @@ import { requestLogin, setToken } from '../helpers/APIRequests';
 import { localUser, setLocalUser } from '../helpers/localStorage';
 import '../css/login.css';
 
+const deliveryImage = require('../images/delivery.jpg');
+
 function LoginComponent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -52,8 +54,7 @@ function LoginComponent() {
   return (
     <div className="login">
       <img
-        // eslint-disable-next-line global-require
-        src={ require('../images/delivery.jpg') }
+        src={ deliveryImage }
         alt="delivery"
         className="delivery-image"
       />
