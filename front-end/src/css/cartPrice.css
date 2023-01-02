@@ -11,9 +11,8 @@
   color: white;
   display: flex;
   flex-direction: row;
-  align-items: baseline;
-  justify-content: space-evenly;
   font-size: 15px;
   gap: 10px;
+  justify-content: space-evenly;
   margin-bottom: 15px;
 }

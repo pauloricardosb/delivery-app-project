@@ -9,16 +9,16 @@
 }
 
 .register-form input {
+  background: none;
+  border: none;
+  border-bottom: 2px solid white;
+  box-shadow: none;
+  color: white;
   display: flex;
   margin-bottom: 2rem;
+  outline: none;
   padding: 0.6rem;
   width: 100%;
-  border: none;
-  box-shadow: none;
-  background: none;
-  border-bottom: 2px solid white;
-  outline: none;
-  color: white;
 }
 
 .register-form button {

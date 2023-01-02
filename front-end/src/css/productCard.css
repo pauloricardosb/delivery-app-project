@@ -1,19 +1,19 @@
 .card-product {
+  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
-  background-color: white;
 }
 
 .card-product img {
+  border-radius: 10px;
   height: 90px;
   margin-bottom: 8px;
   margin-left: 30px;
   margin-right: 10px;
   margin-top: 8px;
   width: 70px;
-  border-radius: 10px;
 }
 
 .info-product {
@@ -33,13 +33,13 @@
 }
 
 .quantity-btn button {
+  background-color: #f25252;
   border: none;
   border-radius: 50px;
-  margin: 5px;
-  padding: 6px;
-  background-color: #f25252;
   color: white;
   font-weight: bolder;
+  margin: 5px;
+  padding: 6px;
 }
 
 .quantity-input {

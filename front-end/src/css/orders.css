@@ -1,5 +1,6 @@
 .orders {
   align-items: center;
+  background-color: ghostwhite;
   border: 1px solid white;
   border-radius: 5px;
   color: black;
@@ -7,5 +8,4 @@
   justify-content: space-evenly;
   margin: 2.5rem;
   width: 80%;
-  background-color: ghostwhite;
 }

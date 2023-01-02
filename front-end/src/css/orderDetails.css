@@ -22,17 +22,17 @@
 
 .detalhes-pedido2 {
   align-items: center;
+  background-color: aliceblue;
   border: 1px solid white;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   margin-top: 20px;
   width: 80%;
-  background-color: aliceblue;
-  justify-content: space-around;
 }
 
 .order-details-div {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
