@@ -1,0 +1,49 @@
+.card-product {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.card-product img {
+  border-radius: 10px;
+  height: 90px;
+  margin: 8px;
+  margin-left: 30px;
+  margin-right: 10px;
+  width: 70px;
+}
+
+.info-product {
+  align-items: center;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quantity-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 30px;
+  width: 60px;
+}
+
+.quantity-btn button {
+  background-color: #f25252;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: 400;
+  margin: 5px;
+  padding: 6px;
+}
+
+.quantity-input {
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+  text-align: center;
+}

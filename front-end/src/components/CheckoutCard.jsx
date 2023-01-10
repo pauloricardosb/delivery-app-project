@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../css/checkoutCard.css';
 
 function CheckoutCard({ item: { name, price, quantity }, index, handleCart }) {
   const subTotal = () => {
@@ -8,44 +9,48 @@ function CheckoutCard({ item: { name, price, quantity }, index, handleCart }) {
   };
 
   return (
-    <tr>
-      <td
-        data-testid={ `customer_checkout__element-order-table-item-number--${index}` }
-      >
-        { index + 1 }
-      </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-name-${index}` }
-      >
-        { name }
-      </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
-      >
-        { quantity }
-      </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
-      >
-        { parseFloat(price).toFixed(2).replace('.', ',') }
-      </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
-      >
-        { subTotal() }
-      </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
-      >
-        <button
-          type="button"
-          data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-          onClick={ () => handleCart(name) }
+    <div className="cart-table">
+      <tr>
+        <td
+          data-testid={ `customer_checkout__element-order-table-item-number--${index}` }
         >
-          Remover
-        </button>
-      </td>
-    </tr>
+          { index + 1 }
+        </td>
+        <td
+          data-testid={ `customer_checkout__element-order-table-name-${index}` }
+          className="descricao"
+        >
+          { name }
+        </td>
+        <td
+          data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
+        >
+          { quantity }
+        </td>
+        <td
+          data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
+        >
+          { parseFloat(price).toFixed(2).replace('.', ',') }
+        </td>
+        <td
+          data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
+        >
+          R$
+          { subTotal() }
+        </td>
+        <td
+          data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
+        >
+          <button
+            type="button"
+            data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+            onClick={ () => handleCart(name) }
+          >
+            X
+          </button>
+        </td>
+      </tr>
+    </div>
   );
 }
 

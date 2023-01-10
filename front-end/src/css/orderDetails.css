@@ -1,0 +1,38 @@
+.title {
+  color: white;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.detalhes-pedido {
+  align-items: center;
+  color: white;
+  display: flex;
+  font-size: 10px;
+  gap: 3px;
+  justify-content: space-around;
+  margin-left: 5px;
+  text-decoration: underline;
+}
+
+.status-btn {
+  padding: 5px;
+  width: 25%;
+}
+
+.detalhes-pedido2 {
+  align-items: center;
+  background-color: aliceblue;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 20px;
+  width: 80%;
+}
+
+.order-details-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

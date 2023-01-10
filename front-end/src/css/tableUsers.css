@@ -1,0 +1,33 @@
+.table-users {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.table-users thead {
+  border: 1px solid white;
+  margin-bottom: 5px;
+}
+
+.table-users tbody {
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 80%;
+}
+
+.table-users button {
+  background-color: #f8f7f7;
+  border: none;
+  border-radius: 10px;
+  color: #f25252;
+  display: flex;
+  font-weight: 800;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  padding: 10px;
+}

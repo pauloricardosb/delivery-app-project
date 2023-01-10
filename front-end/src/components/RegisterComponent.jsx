@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import { requestRegister, setToken } from '../helpers/APIRequests';
 import { setLocalUser } from '../helpers/localStorage';
+import '../css/register.css';
 
 function RegisterComponent() {
   const navigate = useNavigate();
@@ -36,9 +37,9 @@ function RegisterComponent() {
   }
 
   return (
-    <div>
+    <div className="register-form">
       <label htmlFor="common_register__input-name">
-        Nome
+        Nome:
         <input
           type="text"
           id="common_register__input-name"
@@ -53,7 +54,7 @@ function RegisterComponent() {
         />
       </label>
       <label htmlFor="common_register__input-email">
-        Email
+        Email:
         <input
           type="text"
           id="common_register__input-email"
@@ -68,7 +69,7 @@ function RegisterComponent() {
         />
       </label>
       <label htmlFor="common_register__input-password">
-        password
+        Password:
         <input
           type="password"
           id="common_register__input-password"

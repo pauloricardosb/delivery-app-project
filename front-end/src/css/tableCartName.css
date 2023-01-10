@@ -1,0 +1,79 @@
+.table-cart-name {
+  align-items: center;
+  color: white;
+  display: flex;
+  font-size: 12px;
+  justify-content: space-around;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.table-cart-name td {
+  border: 1px solid;
+}
+
+.price-cart {
+  align-items: center;
+  background-color: #00000052;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  justify-content: center;
+  margin: 30px;
+  width: 50%;
+}
+
+.price-cart p {
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.form-checkout {
+  align-items: stretch;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-checkout select {
+  border: none;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.form-checkout input {
+  background-color: transparent;
+  border-color: transparent;
+  border-bottom-color: white;
+  color: white;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+}
+
+.form-checkout button {
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+}
+
+.checkout-main-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

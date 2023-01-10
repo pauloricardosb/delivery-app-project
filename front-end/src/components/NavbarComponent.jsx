@@ -3,6 +3,7 @@ import ClientNavbar from './ClientNavbar';
 import AdminNavbar from './AdminNavbar';
 import { localUser } from '../helpers/localStorage';
 import SellerNavbar from './SellerNavBar';
+import '../css/navbar.css';
 
 function NavbarComponent() {
   const [userRole, setUserRole] = useState('');
@@ -24,7 +25,7 @@ function NavbarComponent() {
   };
 
   return (
-    <nav>
+    <nav className="navbar">
       { navBar() }
     </nav>
   );
