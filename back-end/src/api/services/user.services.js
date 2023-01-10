@@ -32,11 +32,9 @@ const registerUser = async ({ name, role = 'customer', email, password }) => {
   const token = generateJWT({ name, email, role });
 
   return {
-    user: {
-      name: newUser.name,
-      email: newUser.email,
-      role: newUser.role,
-    },
+    name: newUser.name,
+    email: newUser.email,
+    role: newUser.role,
     token,
   };
 };
